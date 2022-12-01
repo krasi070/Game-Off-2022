@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/passive_effects/PassiveEffectContainer.gd" type="Script" id=2]
+
+[node name="PassiveEffectContainer" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 600, 82 )
+custom_constants/separation = 20
+alignment = 2
+script = ExtResource( 2 )

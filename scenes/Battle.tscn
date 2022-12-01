@@ -1,0 +1,202 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://scripts/battle/Battle.gd" type="Script" id=1]
+[ext_resource path="res://scripts/battle/BattleStatePreparation.gd" type="Script" id=2]
+[ext_resource path="res://scripts/battle/BattleStateTurnStart.gd" type="Script" id=3]
+[ext_resource path="res://scripts/battle/BattleStatePlanning.gd" type="Script" id=4]
+[ext_resource path="res://scripts/battle/BattleStatePostPlanning.gd" type="Script" id=5]
+[ext_resource path="res://scripts/battle/BattleStateActionPairExecution.gd" type="Script" id=6]
+[ext_resource path="res://scripts/battle/BattleStateTurnEnd.gd" type="Script" id=7]
+[ext_resource path="res://scripts/battle/BattleStateLose.gd" type="Script" id=8]
+[ext_resource path="res://scripts/battle/BattleStateWin.gd" type="Script" id=9]
+[ext_resource path="res://scenes/ui/HealthBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/ui/EgoCounter.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/sprites/backgrounds/centipede_background.png" type="Texture" id=12]
+[ext_resource path="res://scripts/battle/BattleStateStory.gd" type="Script" id=13]
+[ext_resource path="res://assets/resources/sprite_frames/characters/LizardSpriteFrames.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://scenes/ActionBlockSequence.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/ui/InfoBox.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scripts/battle/BattleStateAfterExecution.gd" type="Script" id=18]
+[ext_resource path="res://assets/resources/sprite_frames/characters/SquireSpriteFrames.tres" type="SpriteFrames" id=19]
+[ext_resource path="res://assets/sprites/ui/health_bar_fill.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/ui/health_bar_flipped_fill.png" type="Texture" id=21]
+[ext_resource path="res://scenes/ui/PassiveEffectContainer.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/resources/sprite_frames/characters/HeroSpriteFrames.tres" type="SpriteFrames" id=23]
+[ext_resource path="res://assets/resources/shaders/HeroShaderMaterial.tres" type="Material" id=24]
+[ext_resource path="res://assets/resources/shaders/EnemyShaderMaterial.tres" type="Material" id=25]
+[ext_resource path="res://scenes/Squire.tscn" type="PackedScene" id=26]
+
+[sub_resource type="Animation" id=2]
+resource_name = "ui_layer_appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("UILayer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UILayer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Battle" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 12 )
+
+[node name="Hero" parent="Background" instance=ExtResource( 17 )]
+position = Vector2( -970, 258.621 )
+shader_material = ExtResource( 24 )
+
+[node name="Enemy" parent="Background" instance=ExtResource( 17 )]
+position = Vector2( -922.414, 258.621 )
+shader_material = ExtResource( 25 )
+
+[node name="Squire" parent="Background" instance=ExtResource( 26 )]
+position = Vector2( -1350, 390 )
+
+[node name="SquireAnimatedSprite" type="AnimatedSprite" parent="Background"]
+visible = false
+position = Vector2( -1320, 390 )
+scale = Vector2( 1.6, 1.6 )
+frames = ExtResource( 19 )
+animation = "idle"
+frame = 23
+playing = true
+flip_h = true
+
+[node name="HeroAnimatedSprite" type="AnimatedSprite" parent="Background"]
+visible = false
+position = Vector2( -922.414, 258.621 )
+scale = Vector2( 1.6, 1.6 )
+frames = ExtResource( 23 )
+animation = "idle"
+
+[node name="EnemyAnimatedSprite" type="AnimatedSprite" parent="Background"]
+visible = false
+position = Vector2( 1110, 390 )
+scale = Vector2( 1.6, 1.6 )
+frames = ExtResource( 14 )
+animation = "idle"
+frame = 25
+playing = true
+flip_h = true
+
+[node name="PlayerSequence" parent="." instance=ExtResource( 15 )]
+position = Vector2( 960, 400 )
+assigned_to = "Player"
+
+[node name="EnemySequence" parent="." instance=ExtResource( 15 )]
+position = Vector2( 960, 140 )
+assigned_to = "Enemy"
+action_num = 8
+selectable = false
+
+[node name="InfoBox" parent="." instance=ExtResource( 16 )]
+
+[node name="UILayer" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="PlayerUI" type="Control" parent="UILayer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 840.0
+margin_bottom = 240.0
+mouse_filter = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HealthBar" parent="UILayer/PlayerUI" instance=ExtResource( 10 )]
+margin_right = 379.0
+margin_bottom = 82.0
+rect_pivot_offset = Vector2( -582, 226 )
+progress_texture = ExtResource( 20 )
+
+[node name="EgoCounter" parent="UILayer/PlayerUI" instance=ExtResource( 11 )]
+margin_top = 90.0
+margin_right = 1000.0
+margin_bottom = 162.0
+
+[node name="PassiveEffectContainer" parent="UILayer/PlayerUI" instance=ExtResource( 22 )]
+margin_top = 160.0
+margin_right = 600.0
+margin_bottom = 242.0
+alignment = 0
+assigned_to = "Player"
+
+[node name="EnemyUI" type="Control" parent="UILayer"]
+margin_left = 1480.0
+margin_top = 40.0
+margin_right = 1480.0
+margin_bottom = 40.0
+
+[node name="HealthBar" parent="UILayer/EnemyUI" instance=ExtResource( 10 )]
+margin_right = 379.0
+margin_bottom = 82.0
+rect_pivot_offset = Vector2( -582, 226 )
+alignment = 1
+progress_texture = ExtResource( 21 )
+
+[node name="PassiveEffectContainer" parent="UILayer/EnemyUI" instance=ExtResource( 22 )]
+margin_left = -220.0
+margin_top = 100.0
+margin_right = 380.0
+margin_bottom = 182.0
+assigned_to = "Enemy"
+
+[node name="States" type="Node" parent="."]
+
+[node name="Preparation" type="Node" parent="States"]
+script = ExtResource( 2 )
+
+[node name="Story" type="Node" parent="States"]
+script = ExtResource( 13 )
+
+[node name="TurnStart" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="Planning" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="PostPlanning" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="ActionPairExecution" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="AfterExecution" type="Node" parent="States"]
+script = ExtResource( 18 )
+
+[node name="TurnEnd" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="Lose" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Win" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ui_layer_appear = SubResource( 2 )

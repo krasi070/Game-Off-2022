@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/backgrounds/intermission_background.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/InfoBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/intermission/IntermissionScreen.gd" type="Script" id=5]
+[ext_resource path="res://scripts/intermission/IntermissionStateEnd.gd" type="Script" id=6]
+[ext_resource path="res://scripts/intermission/IntermissionStateStory.gd" type="Script" id=7]
+[ext_resource path="res://scripts/intermission/IntermissionStateChoice.gd" type="Script" id=8]
+
+[node name="IntermissionScreen" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+scale = Vector2( 0.96, 0.96 )
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 978.0
+margin_top = 257.0
+margin_right = 1459.0
+margin_bottom = 491.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Good night, 
+my sweet prince"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="DecisionContainer" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 1000.0
+margin_top = 305.0
+margin_right = 1254.0
+margin_bottom = 387.0
+rect_scale = Vector2( 1.75, 1.75 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LeftItemContainer" type="Control" parent="DecisionContainer"]
+margin_right = 82.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 82, 82 )
+
+[node name="OrLabel" type="Label" parent="DecisionContainer"]
+margin_left = 86.0
+margin_right = 168.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 82, 82 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "or"
+align = 1
+valign = 1
+
+[node name="RightItemContainer" type="Control" parent="DecisionContainer"]
+margin_left = 172.0
+margin_right = 254.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 82, 82 )
+
+[node name="InfoBox" parent="." instance=ExtResource( 4 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Story" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="Choice" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="End" type="Node" parent="States"]
+script = ExtResource( 6 )

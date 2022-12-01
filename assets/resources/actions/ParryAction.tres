@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scripts/resources/ActionBlockData.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/sprite_frames/actions/ParrySpriteFrames.tres" type="SpriteFrames" id=2]
+
+[resource]
+script = ExtResource( 1 )
+action_sprite_frames = ExtResource( 2 )
+action_type = 13
+priority = 1
+execute_again_after = true
+shape = 2
+action_name = "Parry"
+on_hover_text = "(parry) negate damage
+if negated deal it back"

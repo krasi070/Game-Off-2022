@@ -1,0 +1,154 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/ui/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/backgrounds/main_menu_characters.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/ui/button_big.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/ui/button_medium.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/ui/button_small.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Game-Regular-Menu.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scripts/ui/MainMenuButton.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/backgrounds/main_menu_backgound.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/backgrounds/main_menu_foreground.png" type="Texture" id=9]
+[ext_resource path="res://assets/fonts/Game-Regular.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 10 )
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+scale = Vector2( 0.96, 0.96 )
+texture = ExtResource( 8 )
+
+[node name="Foreground" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+scale = Vector2( 0.96, 0.96 )
+texture = ExtResource( 9 )
+
+[node name="Characters" type="Sprite" parent="Foreground"]
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Foreground"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -951.042
+margin_top = -675.0
+margin_right = -560.042
+margin_bottom = -619.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "(F) Fullscreen"
+
+[node name="ButtonContainer" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="StartJourneyButton" type="TextureButton" parent="ButtonContainer"]
+margin_left = 828.0
+margin_top = 727.0
+margin_right = 1836.0
+margin_bottom = 1059.0
+rect_scale = Vector2( 0.96, 0.96 )
+rect_pivot_offset = Vector2( 504, 166 )
+texture_normal = ExtResource( 3 )
+script = ExtResource( 7 )
+
+[node name="BeginJourneyRichTextLabel" type="RichTextLabel" parent="ButtonContainer/StartJourneyButton"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 36.7083
+margin_top = 0.625
+margin_right = -80.2917
+margin_bottom = 100.625
+rect_min_size = Vector2( 0, 100 )
+rect_rotation = -4.4
+mouse_filter = 2
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Begin Journey[/center]"
+text = "Begin Journey"
+
+[node name="Shadow" type="TextureRect" parent="ButtonContainer/StartJourneyButton"]
+self_modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1028.0
+margin_bottom = 352.0
+texture = ExtResource( 3 )
+
+[node name="OptionsButton" type="TextureButton" parent="ButtonContainer"]
+margin_left = 941.0
+margin_top = 392.0
+margin_right = 1736.0
+margin_bottom = 724.0
+rect_scale = Vector2( 0.96, 0.96 )
+rect_pivot_offset = Vector2( 397.5, 166 )
+texture_normal = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="OptionsRichTextLabel" type="RichTextLabel" parent="ButtonContainer/OptionsButton"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 183.125
+margin_top = -58.0834
+margin_right = -151.875
+margin_bottom = 85.9166
+rect_min_size = Vector2( 0, 100 )
+mouse_filter = 2
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Options[/center]"
+text = "Options"
+
+[node name="Shadow" type="TextureRect" parent="ButtonContainer/OptionsButton"]
+self_modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1028.0
+margin_bottom = 352.0
+texture = ExtResource( 4 )
+
+[node name="QuitButton" type="TextureButton" parent="ButtonContainer"]
+margin_left = 1356.0
+margin_top = 151.0
+margin_right = 1772.0
+margin_bottom = 361.0
+rect_scale = Vector2( 0.96, 0.96 )
+rect_pivot_offset = Vector2( 208, 105 )
+texture_normal = ExtResource( 5 )
+script = ExtResource( 7 )
+
+[node name="QuitRichTextLabel" type="RichTextLabel" parent="ButtonContainer/QuitButton"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 2.4999
+margin_top = -42.7083
+margin_right = -62.5001
+margin_bottom = 101.292
+rect_min_size = Vector2( 0, 100 )
+rect_rotation = -4.1778
+mouse_filter = 2
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Quit...[/center]"
+text = "Quit..."
+
+[node name="Shadow" type="TextureRect" parent="ButtonContainer/QuitButton"]
+self_modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1028.0
+margin_bottom = 352.0
+texture = ExtResource( 5 )

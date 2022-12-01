@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/ui/EgoCounter.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/ui/ego.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/ui/ego_full.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/ui/ego_empty.png" type="Texture" id=4]
+
+[node name="EgoCounter" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1000, 72 )
+custom_constants/separation = 0
+script = ExtResource( 1 )
+ego_full_texture = ExtResource( 3 )
+ego_empty_texture = ExtResource( 4 )
+
+[node name="EgoTextTexture" type="TextureRect" parent="."]
+margin_right = 88.0
+margin_bottom = 72.0
+texture = ExtResource( 2 )
+
+[node name="Icon1" type="TextureRect" parent="."]
+margin_left = 88.0
+margin_right = 160.0
+margin_bottom = 72.0
+texture = ExtResource( 3 )
+
+[node name="Icon2" type="TextureRect" parent="."]
+margin_left = 160.0
+margin_right = 232.0
+margin_bottom = 72.0
+texture = ExtResource( 3 )
+
+[node name="Icon3" type="TextureRect" parent="."]
+margin_left = 232.0
+margin_right = 304.0
+margin_bottom = 72.0
+texture = ExtResource( 3 )
+
+[node name="Icon4" type="TextureRect" parent="."]
+margin_left = 304.0
+margin_right = 376.0
+margin_bottom = 72.0
+texture = ExtResource( 3 )
+
+[node name="Icon5" type="TextureRect" parent="."]
+margin_left = 376.0
+margin_right = 448.0
+margin_bottom = 72.0
+texture = ExtResource( 3 )

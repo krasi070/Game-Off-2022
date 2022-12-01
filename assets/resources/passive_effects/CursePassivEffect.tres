@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scripts/resources/PassiveEffectData.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/passives/curse.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+passive_effect_type = 4
+on_hover_text = "opponent loses ego on insults"
+is_permanent = true
+is_positive = true
+associated_number = 0
+remove_on_zero = false

@@ -1,0 +1,56 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=2]
+
+[ext_resource path="res://assets/sprites/actions/poof.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 240, 0, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 240, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 240, 240, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 240, 480, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 720, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 240, 720, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 960, 240, 240 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "poof",
+"speed": 12.0
+} ]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TavernSuspenceMusic_SpedUp.mp3-1fef8a582d8aabfa81819c1f4ccc55fb.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/TavernSuspenceMusic_SpedUp.mp3"
+dest_files=[ "res://.import/TavernSuspenceMusic_SpedUp.mp3-1fef8a582d8aabfa81819c1f4ccc55fb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

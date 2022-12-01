@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/strong hit.mp3-e8e4dc3049720ca36031e5551e4fefb6.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/strong hit.mp3"
+dest_files=[ "res://.import/strong hit.mp3-e8e4dc3049720ca36031e5551e4fefb6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

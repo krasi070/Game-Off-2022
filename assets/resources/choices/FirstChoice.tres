@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://scripts/resources/IntermissionChoiceData.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/actions/CopyAction.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/actions/ArroganceAction.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+type = 0
+first_choice = ExtResource( 2 )
+second_choice = ExtResource( 3 )

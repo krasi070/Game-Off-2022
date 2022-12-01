@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/passive_effects/PassiveEffect.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/temp_passives/mood_down.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/temp_passives/neg_passive_bg.png" type="Texture" id=3]
+[ext_resource path="res://assets/resources/passive_effects/EgoBoostPassiveEffect.tres" type="Resource" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 41, 41 )
+
+[node name="PassiveEffect" type="Node2D"]
+position = Vector2( 41, 41 )
+script = ExtResource( 1 )
+data = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 57.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "10"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )

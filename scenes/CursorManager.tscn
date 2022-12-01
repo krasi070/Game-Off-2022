@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/globals/CursorManager.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/cursors/cursor_select.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/cursors/cursor_default.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/cursors/cursor_examine.png" type="Texture" id=4]
+
+[node name="CursorManager" type="CanvasLayer"]
+script = ExtResource( 1 )
+default_cursor = ExtResource( 3 )
+examine_cursor = ExtResource( 4 )
+select_cursor = ExtResource( 2 )
+base_window_size = Vector2( 1920, 1080 )
+base_cursor_size = Vector2( 60, 60 )
+
+[node name="Sprite" type="Sprite" parent="."]

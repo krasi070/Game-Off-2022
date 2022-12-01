@@ -1,0 +1,171 @@
+[gd_resource type="SpriteFrames" load_steps=34 format=2]
+
+[ext_resource path="res://assets/sprites/characters/golem.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 0, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 1520, 0, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 2280, 0, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 3040, 0, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 792, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 792, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 1520, 792, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 2280, 792, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 3040, 792, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1584, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 1584, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 1520, 1584, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 2280, 1584, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 3040, 1584, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 2376, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 2376, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 1520, 2376, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 2280, 2376, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 3040, 2376, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 3168, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 3168, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 1520, 3168, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 2280, 3168, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 3040, 3168, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 3960, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 3960, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 1520, 3960, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 2280, 3960, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 3040, 3960, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 0, 4752, 760, 792 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 5
+atlas = ExtResource( 1 )
+region = Rect2( 760, 4752, 760, 792 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "idle",
+"speed": 17.0
+} ]
