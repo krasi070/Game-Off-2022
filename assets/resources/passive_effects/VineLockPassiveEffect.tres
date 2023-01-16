@@ -1,14 +1,21 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://scripts/resources/PassiveEffectData.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/passives/vine.png" type="Texture" id=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 5
+load_path = "res://.import/vine.png-4b196299db2af973b38f1a017177746a.stex"
 
 [resource]
 script = ExtResource( 1 )
-texture = ExtResource( 2 )
+texture = SubResource( 1 )
 passive_effect_type = 2
-on_hover_text = "lock random opponent actions"
+passive_name = "Vine Lock"
+on_hover_text = "lock a random opponent action."
+signal_to_emit_on_click = ""
 is_permanent = true
 is_positive = true
+is_clickable = false
+is_active_by_default = true
 associated_number = 0
 remove_on_zero = false

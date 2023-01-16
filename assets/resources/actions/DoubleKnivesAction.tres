@@ -11,4 +11,4 @@ priority = 0
 execute_again_after = false
 shape = 0
 action_name = "Double Knives"
-on_hover_text = "attack for 2 damage"
+on_hover_text = "deal 2 damage."

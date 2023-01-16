@@ -25,7 +25,7 @@ func _set_states_parent_node(parent_node: Node) -> void:
 	var state_nodes = parent_node.get_children()
 	for state_node in state_nodes:
 		_debug_log("adding state %s" % state_node.name)
-		states[ state_node.name ] = state_node
+		states[state_node.name] = state_node
 		state_node.fsm = self
 		state_node.obj = self.obj
 

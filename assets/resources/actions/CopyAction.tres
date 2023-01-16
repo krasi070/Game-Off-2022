@@ -11,4 +11,6 @@ priority = 0
 execute_again_after = false
 shape = 2
 action_name = "Mirror"
-on_hover_text = "copies previous action on turn end"
+on_hover_text = "copies previous action on turn end.
+if this is the first action, turn into EMPTY MIND on turn start.
+"

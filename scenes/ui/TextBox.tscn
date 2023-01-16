@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/textbox/TextBox.gd" type="Script" id=1]
 [ext_resource path="res://scripts/textbox/TextboxStatePreparation.gd" type="Script" id=2]
@@ -8,6 +8,17 @@
 [ext_resource path="res://assets/resources/sprite_frames/character_portraits/HeroPortraitSpriteFrames.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://assets/sprites/ui/ticker01.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/ui/ticker02.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/tutorial/tutorial_passives.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/tutorial/tutoial_enemy_actions.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/tutorial/tutorial_ego.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/tutorial/tutorial_squire_bubble.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/tutorial/tutoial_hero_actions.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/tutorial/tutorial_enemy_passives.png" type="Texture" id=14]
+[ext_resource path="res://assets/fonts/Game-Regular.ttf" type="DynamicFontData" id=15]
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+font_data = ExtResource( 15 )
 
 [sub_resource type="AnimatedTexture" id=1]
 flags = 5
@@ -18,8 +29,38 @@ frame_1/texture = ExtResource( 8 )
 frame_1/delay_sec = 0.0
 
 [node name="TextBox" type="CanvasLayer"]
-layer = 3
+layer = 2
 script = ExtResource( 1 )
+tutorial_hero_actions_texture = ExtResource( 13 )
+tutorial_enemy_actions_texture = ExtResource( 10 )
+tutorial_ego_texture = ExtResource( 11 )
+tutorial_passives_texture = ExtResource( 9 )
+tutorial_end_turn_texture = ExtResource( 12 )
+tutorial_enemy_passives_texture = ExtResource( 14 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 9 )
+
+[node name="SkipText" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -271.0
+margin_top = -55.0
+margin_right = -51.0
+margin_bottom = 9.0
+rect_min_size = Vector2( 0, 64 )
+custom_colors/font_color = Color( 0.623529, 0.670588, 0.756863, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 2 )
+text = "press (S) to skip"
+align = 2
+valign = 1
 
 [node name="TextBox" type="Control" parent="."]
 anchor_right = 1.0
@@ -63,7 +104,7 @@ rect_min_size = Vector2( 200, 200 )
 [node name="AnimatedPortrait" type="AnimatedSprite" parent="TextBox/Margin/NinePatchRect/Margin/HBox/Control"]
 frames = ExtResource( 6 )
 animation = "boil"
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( 100, 100 )
 
@@ -92,6 +133,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 text = "HERO"
+valign = 1
 
 [node name="Text" type="RichTextLabel" parent="TextBox/Margin/NinePatchRect/Margin/HBox/HBox/VBox"]
 margin_top = 94.0
@@ -108,6 +150,7 @@ text = "Damn, look at me go! Damn, look at me go! Damn, look at me go! Damn, loo
 margin_left = 1514.0
 margin_right = 1565.0
 margin_bottom = 210.0
+rect_min_size = Vector2( 51, 0 )
 
 [node name="Margin" type="Control" parent="TextBox/Margin/NinePatchRect/Margin/HBox/HBox/TickerBox"]
 margin_right = 51.0

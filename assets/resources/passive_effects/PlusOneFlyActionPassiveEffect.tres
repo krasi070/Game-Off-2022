@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scripts/resources/PassiveEffectData.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/passives/plus_one_fly_action.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+passive_effect_type = 12
+passive_name = "Plus 1 Empty Mind"
+on_hover_text = "plus 1 action slot.
+first action is always EMPTY MIND."
+signal_to_emit_on_click = ""
+is_permanent = true
+is_positive = true
+is_clickable = false
+is_active_by_default = false
+associated_number = 0
+remove_on_zero = false

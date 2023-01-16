@@ -1,5 +1,9 @@
 extends Node2D
 
+signal invalid_swap
+signal swapped
+signal swap_was_undone
+
 const APPEAR_Y_DIFF: float = 10.0
 const APPEAR_ANIM_DEFAULT_SPEED: float = 0.3
 const COMBO_THRESHOLD: int = 3
@@ -8,7 +12,7 @@ export var action_block_scene: PackedScene
 export var assigned_to: String
 export var action_num: int = 10
 export var action_num_for_pos: int = 10
-export var selectable: bool = true
+export var selectable: bool = false
 
 var action_distance: int = 15
 var texture_width: int = 72
@@ -65,7 +69,7 @@ func disappear(pos: Vector2) -> void:
 
 func has_action(type: int) -> bool:
 	for action in actions:
-		if action.data.action_type == type:
+		if action.final_action.action_type == type:
 			return true
 	return false
 
@@ -104,6 +108,11 @@ func set_actions(to_set: Array = []) -> void:
 		action_index += 1
 
 
+func set_action(to_set: int, index: int) -> void:
+	actions[index].data = ActionManager.data_by_action[to_set]
+	actions[index].set_sprite_data()
+
+
 func remove_actions() -> void:
 	actions = []
 	selected_actions = []
@@ -120,6 +129,22 @@ func lock_random(amount: int) -> void:
 		indexes.shuffle()
 		var rand_index: int = indexes.pop_front()
 		actions[rand_index].lock()
+
+
+func get_chain_count() -> int:
+	var count: int = 0
+	var last_chain_shape: int = -1
+	for action in actions:
+		if action.is_doubled and action.data.shape != last_chain_shape:
+			last_chain_shape = action.data.shape
+			count += 1
+	return count
+
+
+func unselect_actions() -> void:
+	for action in actions:
+		action.unselect()
+	selected_actions = []
 
 
 func change_from_to(from: int, to: int) -> void:
@@ -188,7 +213,7 @@ func _doubles_after_break_chain_is_applied() -> void:
 		if i - size_diff < 0:
 			continue
 		var is_break_chain: bool = \
-			opponent_seq.actions[i - size_diff].final_action == Enums.ACTION_TYPE.BREAK_CHAIN
+			opponent_seq.actions[i - size_diff].final_action.action_type == Enums.ACTION_TYPE.BREAK_CHAIN
 		if is_break_chain:
 			opponent_seq.actions[i - size_diff].set_effect_anim(actions[i].is_doubled)
 			if actions[i].is_doubled:
@@ -215,6 +240,8 @@ func _swap_actions() -> void:
 	# Prep before swap
 	_add_curr_seq_to_memory()
 	selectable = false
+	PlayerStats.ego -= 1
+	AudioController.play_player_sfx(AudioController.WHIMPER_SOUND)
 	var duration: float = selected_actions[0].play_before_swap_anim()
 	selected_actions[1].play_before_swap_anim()
 	yield(get_tree().create_timer(duration), "timeout")
@@ -229,14 +256,15 @@ func _swap_actions() -> void:
 	set_doubles()
 	opponent_seq.set_doubles()
 	yield(get_tree().create_timer(duration), "timeout")
-	PlayerStats.ego -= 1
 	# Return control and forget selected actions
+	emit_signal("swapped")
 	selected_actions = []
 	selectable = true
 
 
 func _invalid_swap() -> void:
 	selectable = false
+	emit_signal("invalid_swap")
 	selected_actions[0].click()
 	selected_actions[1].click()
 	yield(get_tree().create_timer(selected_actions[0].SELECT_ANIM_DURATION), "timeout")
@@ -300,12 +328,14 @@ func _visibility_changed() -> void:
 func _pressed_undo() -> void:
 	if not selectable or action_seq_memory.size() == 0:
 		return
+	unselect_actions()
 	var prev_seq: Array = action_seq_memory.pop_back()
 	for i in range(actions.size()):
 		actions[i].data = prev_seq[i]
 		actions[i].set_sprite_data()
 	set_doubles()
 	PlayerStats.ego += 1
+	emit_signal("swap_was_undone")
 
 
 func _hovered_action(action: Node2D) -> void:
@@ -325,13 +355,14 @@ func _exited_action(action_id: String) -> void:
 		var index: int = _get_index_from_id(action_id)
 		if index >= actions.size():
 			return
-		CursorManager.set_cursor(Enums.CURSOR_TYPE.DEFAULT)
 		actions[index].play_exit_anim()
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.DEFAULT)
 
 
 func _clicked_action(action: Node2D) -> void:
 	if selectable and action.selectable and action.get_meta("id").begins_with(assigned_to):
 		action.click()
+		AudioController.play_ui_sound(AudioController.CLICK_SOUND)
 		if action.selected:
 			selected_actions.append(action)
 		else:

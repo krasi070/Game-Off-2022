@@ -6,6 +6,7 @@ var choices: Dictionary = {}
 
 onready var message_label: Label = $Label
 onready var decision_container: HBoxContainer = $DecisionContainer
+onready var or_label: Label = $OrLabel
 onready var left_container: Control = $DecisionContainer/LeftItemContainer
 onready var right_container: Control = $DecisionContainer/RightItemContainer
 
@@ -24,6 +25,7 @@ func _physics_process(delta: float) -> void:
 
 func show_message_in_bubble(msg: String) -> void:
 	decision_container.hide()
+	or_label.hide()
 	message_label.text = msg
 	message_label.show()
 
@@ -32,6 +34,7 @@ func show_choices(choice_data: Resource) -> void:
 	message_label.hide()
 	_set_choice(choice_data)
 	decision_container.show()
+	or_label.show()
 
 
 func remove_choices() -> void:

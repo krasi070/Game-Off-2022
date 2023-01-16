@@ -10,6 +10,7 @@ onready var player_seq: Node2D  = $PlayerSequence
 onready var enemy_seq: Node2D  = $EnemySequence
 
 onready var background: Sprite = $Background
+onready var background_top: Sprite = $Background/BackgroundTop
 #onready var squire_sprite: AnimatedSprite = $Background/SquireAnimatedSprite
 onready var squire_character: Node2D = $Background/Squire
 onready var hero_character: Node2D = $Background/Hero
@@ -21,6 +22,7 @@ onready var player_ego_counter: Control = $UILayer/PlayerUI/EgoCounter
 onready var player_passive_effect_container: HBoxContainer = $UILayer/PlayerUI/PassiveEffectContainer
 onready var enemy_health_bar: TextureProgress = $UILayer/EnemyUI/HealthBar
 onready var enemy_passive_effect_container: HBoxContainer = $UILayer/EnemyUI/PassiveEffectContainer
+onready var battle_message: ColorRect = $BattleMessage
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 
@@ -60,16 +62,26 @@ func update_action_slots_amount() -> void:
 
 func set_player_seq_for_turn() -> void:
 	player_seq.remove_actions()
-	player_seq.set_actions()
-	player_seq.player_advantage()
-	print(player_seq.position)
+	if not TutorialManager.skip_tutorial and TutorialManager.tutorial_plans_index < TutorialManager.tutorial_hero_plans.size():
+		player_seq.set_actions(TutorialManager.tutorial_hero_plans[TutorialManager.tutorial_plans_index].duplicate())
+	else:
+		player_seq.set_actions()
+		player_seq.player_advantage()
+	if PlayerStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLUS_FLY):
+		player_seq.set_action(Enums.ACTION_TYPE.NOTHING, 0)
 	player_seq.appear(PLAYER_SEQ_POS)
 
 
 func set_enemy_seq_for_turn() -> void:
 	enemy_seq.remove_actions()
-	var rand_seq: Array = _get_random_enemy_action_seq()
-	enemy_seq.set_actions(rand_seq)
+	var seq: Array = []
+	if not TutorialManager.skip_tutorial and TutorialManager.tutorial_plans_index < TutorialManager.tutorial_enemy_plans.size():
+		seq = TutorialManager.tutorial_enemy_plans[TutorialManager.tutorial_plans_index].duplicate()
+	else:
+		seq = _get_random_enemy_action_seq()
+	if EnemyStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLUS_FLY):
+		enemy_seq.set_action(Enums.ACTION_TYPE.NOTHING, 0)
+	enemy_seq.set_actions(seq)
 	enemy_seq.appear(ENEMY_SEQ_POS)
 
 
@@ -88,9 +100,47 @@ func hide_battle_ui(with_anim: bool = true) -> void:
 		#ui_layer.modulate = Color.transparent
 
 
+func reset_passive_containers() -> void:
+	player_passive_effect_container.empty_container()
+	enemy_passive_effect_container.empty_container()
+
+
 func set_unit_initial_passives(unit: UnitStats, container: HBoxContainer) -> void:
 	for passive in unit.passives:
 		_set_passive(passive, container)
+
+
+func set_passive_effect_anim_activations(unit: UnitStats, seq: Node2D, container: HBoxContainer, state: String) -> void:
+	# Chain Health
+	var chain_health_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.CHAIN_HEALTH)
+	if is_instance_valid(chain_health_passive):
+		chain_health_passive.set_active(seq.get_chain_count() > 0 and \
+			(state == "TurnStart" or state == "Planning"))
+	
+	# Potty Mouth
+	var potty_mouth_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.CURSE)
+	if is_instance_valid(potty_mouth_passive):
+		potty_mouth_passive.set_active(state == "Story")
+	
+	# Plot Armor
+	var plot_armor_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR)
+	if is_instance_valid(plot_armor_passive):
+		plot_armor_passive.set_active(state == "ActionPairExecution" or state == "AfterExecution")
+	
+	# Rage
+	var rage_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.RAGE)
+	if is_instance_valid(rage_passive):
+		rage_passive.set_active(unit.health <= unit.max_health / 3.0)
+	
+
+
+func update_passive_active_anims(state: String) -> void:
+	set_passive_effect_anim_activations(PlayerStats, player_seq, player_passive_effect_container, state)
+	set_passive_effect_anim_activations(EnemyStats, enemy_seq, enemy_passive_effect_container, state)
 
 
 func _set_opponent_seq() -> void:
@@ -123,6 +173,8 @@ func _get_random_enemy_action_seq() -> Array:
 
 func _get_unit_action_slots_for_turn(unit: UnitStats) -> int:
 	var unit_action_slots: int = unit.action_slots
+	if unit.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLUS_FLY):
+		unit_action_slots += 1
 	if unit.turn_stats.has("bonus_action_slots"):
 		unit_action_slots += unit.turn_stats.bonus_action_slots
 	return unit_action_slots
@@ -133,6 +185,7 @@ func _connect_player_signals() -> void:
 	PlayerStats.connect("ego_changed", self, "_player_ego_changed")
 	PlayerStats.connect("passive_added", self, "_player_passive_added")
 	PlayerStats.connect("passive_removed", self, "_player_passive_removed")
+	player_seq.connect("invalid_swap", self, "_player_seq_invalid_swap")
 
 
 func _connect_enemy_signals() -> void:
@@ -150,6 +203,7 @@ func _set_passive(passive: Resource, container: HBoxContainer) -> void:
 	var p_instance: Node2D = passive_scene.instance()
 	p_instance.data = passive
 	container.add_passive(p_instance)
+	p_instance.set_active(p_instance.data.is_active_by_default)
 
 
 func _player_health_changed(curr_health: int, max_health: int) -> void:
@@ -160,6 +214,10 @@ func _player_health_changed(curr_health: int, max_health: int) -> void:
 func _player_ego_changed(curr_ego: int, max_ego: int) -> void:
 	player_ego_counter.max_value = max_ego
 	player_ego_counter.value = curr_ego
+
+
+func _player_seq_invalid_swap() -> void:
+	battle_message.play_empty_ego_message_anim()
 
 
 func _player_passive_added(added_passive: Resource) -> void:

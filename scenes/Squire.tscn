@@ -19,7 +19,7 @@ script = ExtResource( 3 )
 [node name="SquireAnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 22
+frame = 5
 playing = true
 flip_h = true
 
@@ -34,17 +34,18 @@ margin_right = 85.0
 margin_bottom = 42.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "Click here when ready"
+text = "oh no, the hero's mood is down"
 align = 1
 valign = 1
 autowrap = true
 
 [node name="Area2D" type="Area2D" parent="Bubble"]
 position = Vector2( -40, 200 )
-scale = Vector2( 1, 1 )
 collision_layer = 4096
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bubble/Area2D"]
 position = Vector2( 17.5, -211.875 )
 shape = SubResource( 1 )
+
+[node name="MessageTimer" type="Timer" parent="."]

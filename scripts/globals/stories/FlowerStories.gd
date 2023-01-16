@@ -7,8 +7,6 @@ var start_story: Array = [
 	Helper.to_entry("Hero", "Hmm, this flower would make for a mighty fine bouquet for the princess..."),
 	Helper.to_entry("Hero", "It's decided! I will defeat you and bring you to the princess!"),
 	Helper.to_entry("Abandoned Houseplant", "You'll introduce me to new friends?"),
-	Helper.to_entry("Squire", "(This flower seems to have a special passive ability)"),
-	Helper.to_entry("Squire", "(Better check it out before we start)"),
 ]
 
 var phase2_story: Array = [

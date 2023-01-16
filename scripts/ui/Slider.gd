@@ -5,6 +5,11 @@ onready var value_label: Label = $Background/HBoxContainer/ValueLabel
 onready var slider: HSlider = $Background/HBoxContainer/HSlider
 
 
+func _ready() -> void:
+	connect("mouse_entered", self, "_mouse_entered")
+	connect("mouse_exited", self, "_mouse_exited")
+
+
 func set_label(text: String) -> void:
 	label.text = text
 
@@ -31,3 +36,14 @@ func set_value(val: float) -> void:
 
 func get_slider() -> HSlider:
 	return slider
+
+
+func _mouse_entered() -> void:
+	rect_scale = Vector2(1.03, 1.03)
+	#AudioController.play_ui_sound(AudioController.BUBBLE_HOVER_SOUND)
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.SELECT)
+
+
+func _mouse_exited() -> void:
+	rect_scale = Vector2.ONE
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.DEFAULT)

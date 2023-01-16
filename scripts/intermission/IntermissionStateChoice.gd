@@ -32,26 +32,32 @@ func _disconnect_from_mouse_events() -> void:
 
 
 func _clicked_action(action: Node2D) -> void:
+	AudioController.play_ui_sound(AudioController.CLICK_SOUND)
 	PlayerStats.add_action(action.data)
 	fsm.state_next = fsm.states.End
 
 
 func _hovered_action(action: Node2D) -> void:
 	action.play_hover_anim()
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.SELECT)
 
 
 func _exited_action(action_id: String) -> void:
 	obj.choices[int(action_id)].play_exit_anim()
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.DEFAULT)
 
 
 func _clicked_passive(passive_effect: Node2D) -> void:
-	PlayerStats.apply_passive(passive_effect.data)
+	AudioController.play_ui_sound(AudioController.CLICK_SOUND)
+	PlayerStats.unlocked_passives.append(passive_effect.data.passive_effect_type)
 	fsm.state_next = fsm.states.End
 
 
 func _hovered_passive(passive_effect: Node2D) -> void:
 	passive_effect.play_hover_anim()
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.SELECT)
 
 
 func _exited_passive(passive_id: String) -> void:
 	obj.choices[int(passive_id)].play_exit_anim()
+	CursorManager.set_cursor(Enums.CURSOR_TYPE.DEFAULT)

@@ -33,6 +33,10 @@ var data_by_action: Dictionary = {
 		preload("res://assets/resources/actions/SpiderAction.tres"),
 	Enums.ACTION_TYPE.LIZARD_HEAD:
 		preload("res://assets/resources/actions/LizardHeadAction.tres"),
+	Enums.ACTION_TYPE.MAGIC_HAT:
+		preload("res://assets/resources/actions/MagicHatAction.tres"),
+	Enums.ACTION_TYPE.THINKING:
+		preload("res://assets/resources/actions/ThinkingAction.tres"),
 }
 
 var action_func: Dictionary = {
@@ -52,6 +56,8 @@ var action_func: Dictionary = {
 	Enums.ACTION_TYPE.BREAK_CHAIN: "exec_break_chain",
 	Enums.ACTION_TYPE.SPIDER: "exec_spider",
 	Enums.ACTION_TYPE.LIZARD_HEAD: "exec_lizard_head",
+	#Enums.ACTION_TYPE.MAGIC_HAT: "exec_magic_hat",
+	Enums.ACTION_TYPE.THINKING: "exec_thinking",
 }
 
 func exec_attack(from: UnitStats, to: UnitStats) -> void:
@@ -91,27 +97,33 @@ func exec_parry(from: UnitStats, to: UnitStats, is_second_execution: bool = fals
 		from.temp_stats.defense += 1
 	else:
 		var deal_damage: int = 0
-		if to.temp_stats.has("dealing_damage"):
-			deal_damage = to.temp_stats.dealing_damage
+		if to.temp_stats.has("dealing_damage_disregading_enemy_stats"):
+			deal_damage = to.temp_stats.dealing_damage_disregading_enemy_stats
+		if from.has_passive(Enums.PASSIVE_EFFECT_TYPE.RAGE) and from.health < floor(from.max_health / 2.0):
+			deal_damage *= 2
+		if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR):
+			deal_damage = max(deal_damage - 1, 0)
 		from.attacked(data_by_action[Enums.ACTION_TYPE.PARRY].action_sprite_frames)
 		to.hurt(deal_damage)
 
 
 func exec_spider(from: UnitStats, to: UnitStats, is_second_execution: bool = false) -> void:
 	if not is_second_execution:
-		var damage: int = 1
-		if from.turn_stats.has("damage_bonus"):
-			damage += from.turn_stats.damage_bonus
-		if to.turn_stats.has("damage_multiplier"):
-			damage *= to.turn_stats.damage_multiplier
-		if to.temp_stats.has("damage_multiplier"):
-			damage *= to.temp_stats.damage_multiplier
-		from.temp_stats["spider_damage"] = damage
+		from.temp_stats["spider_damage"] = 1
 	else:
 		var dealt_damage: int = from.temp_stats["spider_damage"]
-		# Spiders squash each other
-		if to.temp_stats.has("spider_damage"):
-			dealt_damage = 0
+		if dealt_damage > 0:
+			if from.turn_stats.has("damage_bonus"):
+				dealt_damage += from.turn_stats.damage_bonus
+			if to.turn_stats.has("damage_multiplier"):
+				dealt_damage *= to.turn_stats.damage_multiplier
+			if to.temp_stats.has("damage_multiplier"):
+				dealt_damage *= to.temp_stats.damage_multiplier
+			if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR):
+				dealt_damage = max(dealt_damage - 1, 0)
+			# Spiders squash each other
+			if to.temp_stats.has("spider_damage"):
+				dealt_damage = 0
 		from.attacked(data_by_action[Enums.ACTION_TYPE.SPIDER].action_sprite_frames)
 		to.hurt(dealt_damage)
 
@@ -155,8 +167,13 @@ func exec_flytrap(from: UnitStats, to: UnitStats) -> void:
 
 func exec_nothing(from: UnitStats, _to: UnitStats) -> void:
 	from.temp_stats["flies"] = true
-	from.did_nothing()
+	from.did_nothing(data_by_action[Enums.ACTION_TYPE.NOTHING].action_sprite_frames)
 	print("NOTHING from %s" % from.character_name)
+
+
+func exec_thinking(from: UnitStats, _to: UnitStats) -> void:
+	from.did_nothing(data_by_action[Enums.ACTION_TYPE.THINKING].action_sprite_frames)
+	print("THINKING from %s" % from.character_name)
 
 
 func exec_break_chain(from: UnitStats, _to: UnitStats) -> void:
@@ -169,8 +186,10 @@ func exec_arrogance(from: PlayerStats, _to: UnitStats) -> void:
 		from.temp_stats["damage_multiplier"] = 1
 	from.temp_stats.damage_multiplier *= 2
 	var add_ego: int = 1
-	if from.ego == from.max_ego:
+	if from.ego == from.max_ego or (from.turn_stats.has("used_arrogance") and from.turn_stats.used_arrogance):
 		add_ego = 0
+	if add_ego > 0:
+		from.turn_stats["used_arrogance"] = true
 	from.ego += add_ego
 	from.used_arrogance(add_ego)
 	print("ARROGANCE from %s" % from.character_name)
@@ -178,12 +197,26 @@ func exec_arrogance(from: PlayerStats, _to: UnitStats) -> void:
 
 func exec_copy(from_seq: Node2D) -> void:
 	for i in range(from_seq.actions.size()):
-		print("here at ", i)
-		if from_seq.actions[i].final_action == Enums.ACTION_TYPE.COPY:
+		if from_seq.actions[i].final_action.action_type == Enums.ACTION_TYPE.COPY:
 			if i == 0:
 				from_seq.actions[i].change_to(data_by_action[Enums.ACTION_TYPE.NOTHING])
 			else:
-				from_seq.actions[i].change_to(data_by_action[from_seq.actions[i - 1].final_action])
+				from_seq.actions[i].change_to(data_by_action[from_seq.actions[i - 1].final_action.action_type])
+
+
+func exec_magic_hat(from_seq: Node2D) -> void:
+	randomize()
+	var possible_actions: Array = [
+		Enums.ACTION_TYPE.SPIDER, 
+		Enums.ACTION_TYPE.SMACK, 
+		Enums.ACTION_TYPE.DEFEND,
+		Enums.ACTION_TYPE.THINKING,
+	]
+
+	for i in range(from_seq.actions.size()):
+		if from_seq.actions[i].final_action.action_type == Enums.ACTION_TYPE.MAGIC_HAT:
+			possible_actions.shuffle()
+			from_seq.actions[i].change_to(data_by_action[possible_actions.front()])
 
 
 func exec_attack_up(from: UnitStats, _to: UnitStats) -> void:
@@ -197,12 +230,17 @@ func exec_attack_up(from: UnitStats, _to: UnitStats) -> void:
 func _exec_attack_helper(from: UnitStats, to: UnitStats, damage: int) -> int:
 	if from.turn_stats.has("damage_bonus"):
 		damage += from.turn_stats.damage_bonus
+	from.temp_stats["dealing_damage_disregading_enemy_stats"] = damage
+	if from.has_passive(Enums.PASSIVE_EFFECT_TYPE.RAGE) and from.health <= floor(from.max_health / 3.0):
+		damage *= 2
 	if to.turn_stats.has("damage_multiplier"):
 		damage *= to.turn_stats.damage_multiplier
 	if to.temp_stats.has("damage_multiplier"):
 		damage *= to.temp_stats.damage_multiplier
 	from.temp_stats["dealing_damage"] = damage
 	print("ATTACK from %s for %d damage" % [from.character_name, damage])
+	if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR):
+		damage = max(damage - 1, 0)
 	if to.temp_stats.has("defense"):
 		damage = 0
 	if to.temp_stats.has("spider_damage"):

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/poof.ogg-0cc6d4fd5855d2880a5e417600a78f71.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/poof.ogg"
+dest_files=[ "res://.import/poof.ogg-0cc6d4fd5855d2880a5e417600a78f71.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

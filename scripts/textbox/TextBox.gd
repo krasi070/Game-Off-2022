@@ -7,7 +7,14 @@ extends CanvasLayer
 # warning-ignore:unused_signal
 signal finished
 
-const CHAR_READ_RATE: float = 0.025
+const CHAR_READ_RATE: float = 0.015
+
+export(Texture) var tutorial_hero_actions_texture 
+export(Texture) var tutorial_enemy_actions_texture
+export(Texture) var tutorial_ego_texture
+export(Texture) var tutorial_passives_texture
+export(Texture) var tutorial_end_turn_texture
+export(Texture) var tutorial_enemy_passives_texture
 
 var tween: SceneTreeTween
 var entry_queue: Array = []
@@ -28,6 +35,7 @@ var portrait_by_name: Dictionary = {
 }
 
 onready var textbox: Control = $TextBox
+onready var background: TextureRect = $Background
 onready var name_label: Label = \
 	$TextBox/Margin/NinePatchRect/Margin/HBox/HBox/VBox/CharacterName
 onready var body: RichTextLabel = \
@@ -64,7 +72,27 @@ func set_portrait_by_name() -> void:
 	set_portrait(portrait_by_name[name_label.text])
 
 
+func set_tutorial_background(type: int = -1) -> void:
+	background.show()
+	match type:
+		Enums.TUTORIAL.HERO_ACTIONS:
+			 background.texture = tutorial_hero_actions_texture
+		Enums.TUTORIAL.ENEMY_ACTIONS:
+			background.texture = tutorial_enemy_actions_texture
+		Enums.TUTORIAL.EGO:
+			background.texture = tutorial_ego_texture
+		Enums.TUTORIAL.PASSIVES:
+			background.texture = tutorial_passives_texture
+		Enums.TUTORIAL.END_TURN:
+			background.texture = tutorial_end_turn_texture
+		Enums.TUTORIAL.ENEMY_PASSIVES:
+			background.texture = tutorial_enemy_passives_texture
+		_:
+			background.hide()
+
+
 func reset() -> void:
 	hide()
 	ticker.hide()
+	background.hide()
 	body.text = ""

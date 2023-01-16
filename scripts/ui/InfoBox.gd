@@ -13,7 +13,9 @@ onready var passive_bottom_pic: Sprite = \
 onready var passive_top_pic: Sprite = \
 	$InfoBox/Margin/NinePatchRect/Margin/HBox/PassiveEffectSpriteContainer/TopSprite
 onready var info_label: Label = \
-	$InfoBox/Margin/NinePatchRect/Margin/HBox/Label
+	$InfoBox/Margin/NinePatchRect/Margin/HBox/VBox/VBox/Label
+onready var name_label: Label = \
+	$InfoBox/Margin/NinePatchRect/Margin/HBox/VBox/VBox/NameLabel
 
 var showing_passive: bool = false
 var showing_action: bool = false
@@ -23,8 +25,11 @@ func _ready() -> void:
 	hide()
 
 
-func set_action_texture(data: Resource) -> void:
-	action_bottom_pic.frames = data.shape_sprite_frames
+func set_action_texture(data: Resource, shape_res: Resource = null) -> void:
+	if is_instance_valid(shape_res):
+		action_bottom_pic.frames = shape_res.shape_sprite_frames
+	else:
+		action_bottom_pic.frames = data.shape_sprite_frames
 	action_top_pic.frames = data.action_sprite_frames
 	action_sprite_container.show()
 	passive_sprite_container.hide()
@@ -45,10 +50,11 @@ func _connect_mouse_signals() -> void:
 
 
 func _hovered_action(action: Node2D) -> void:
-	set_action_texture(action.data)
-	info_label.text = action.data.on_hover_text
+	set_action_texture(action.final_action, action.data)
+	info_label.text = action.final_action.on_hover_text
+	name_label.text = action.final_action.action_name.to_upper()
 	if action.is_locked:
-		info_label.text += "\n(cannot be moved)"
+		name_label.text += " (locked)"
 	show()
 	showing_action = true
 
@@ -62,6 +68,7 @@ func _hovered_passive(passive_effect: Node2D) -> void:
 	showing_passive = true
 	set_passive_texture(passive_effect.data)
 	info_label.text = passive_effect.data.on_hover_text
+	name_label.text = passive_effect.data.passive_name.to_upper()
 	show()
 
 

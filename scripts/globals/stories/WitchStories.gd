@@ -1,15 +1,26 @@
 extends Node
 
 var start_story: Array = [
-	Helper.to_entry("Hero", "*gulp* Hello, ma'am!"),
+	Helper.to_entry("Hero", "(Gulp) Hello, ma'am!"),
 	Helper.to_entry("Weech", "Ew... Get lost loser!"),
 	Helper.to_entry("Squire", "This'll be a rough battle for the hero..."),
 ]
 
 var phase2_story: Array = [
 	Helper.to_entry("Hero", "I do not fight with women!"),
-	Helper.to_entry("Weech", "Watever you say creep."),
-	Helper.to_entry("Squire", "..."),
+	Helper.to_entry("Weech", "Whatever you say creep."),
+	Helper.to_entry("Weech", "My spider friends will make short work of you. Won't you my lil' spidies."),
+	Helper.to_entry("Hero", "Sp... sp... sp... SPIDERS!"),
+	Helper.to_entry("Squire", "Oh no..."),
+]
+
+var phase3_story: Array = [
+	Helper.to_entry("Weech", "Eeny, meeny, miny, moe, let's see what's inside my magic hat this time."),
+	Helper.to_entry("Weech", "I foresee a dead fox!"),
+	Helper.to_entry("Squire", "Sir, I believe it might be best to reconsider your chances with this lady."),
+	Helper.to_entry("Hero", "For once I agree with you my squire..."),
+	Helper.to_entry("Hero", "Let's get this over with, I need plenty of sleep after battling these horrific sp... sp..."),
+	Helper.to_entry("Hero", "You know what I mean..."),
 ]
 
 var end_story: Array = [

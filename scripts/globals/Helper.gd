@@ -1,7 +1,8 @@
 extends Node
 
-func to_entry(_name: String, body: String) -> Dictionary:
+func to_entry(_name: String, body: String, tutorial: int = -1) -> Dictionary:
 	return {
 		"name": _name,
-		"body": body
+		"body": body,
+		"tutorial": tutorial,
 	}

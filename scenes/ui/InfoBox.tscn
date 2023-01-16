@@ -1,19 +1,23 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/resources/sprite_frames/actions/AttackSpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/ui/InfoBox.gd" type="Script" id=2]
 [ext_resource path="res://assets/resources/sprite_frames/actions/TriangleSpriteFrames.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://assets/sprites/ui/info_box.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/passives/negative_passive.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/passives/mood_down.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/passives/vine.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/Game-Regular.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 36
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
 font_data = ExtResource( 7 )
 
 [node name="InfoBox" type="CanvasLayer"]
-layer = 2
+layer = 3
 script = ExtResource( 2 )
 
 [node name="InfoBox" type="Control" parent="."]
@@ -57,6 +61,7 @@ position = Vector2( 35, 30 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 3 )
 animation = "boil"
+frame = 1
 playing = true
 centered = false
 
@@ -65,6 +70,7 @@ position = Vector2( 35, 30 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
 animation = "boil"
+frame = 1
 playing = true
 centered = false
 
@@ -85,20 +91,59 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="Label" type="Label" parent="InfoBox/Margin/NinePatchRect/Margin/HBox"]
+[node name="VBox" type="VBoxContainer" parent="InfoBox/Margin/NinePatchRect/Margin/HBox"]
 margin_left = 175.0
 margin_right = 695.0
 margin_bottom = 180.0
-rect_min_size = Vector2( 180, 180 )
+size_flags_horizontal = 3
+
+[node name="PaddingTop" type="Control" parent="InfoBox/Margin/NinePatchRect/Margin/HBox/VBox"]
+margin_right = 520.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="VBox" type="VBoxContainer" parent="InfoBox/Margin/NinePatchRect/Margin/HBox/VBox"]
+margin_top = 29.0
+margin_right = 520.0
+margin_bottom = 161.0
+size_flags_vertical = 3
+custom_constants/separation = 10
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="InfoBox/Margin/NinePatchRect/Margin/HBox/VBox/VBox"]
+margin_right = 520.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 1 )
-text = "This is some safefefes oehefi eiosjfio sefhio."
+text = "SWORD (locked)"
+valign = 2
+autowrap = true
+
+[node name="Label" type="Label" parent="InfoBox/Margin/NinePatchRect/Margin/HBox/VBox/VBox"]
+margin_top = 41.0
+margin_right = 520.0
+margin_bottom = 131.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "deal 1 damage
+deal 1 damage
+deal 1 damage"
 valign = 1
 autowrap = true
+
+[node name="PaddingBottom" type="Control" parent="InfoBox/Margin/NinePatchRect/Margin/HBox/VBox"]
+margin_top = 165.0
+margin_right = 520.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 15 )
 
 [node name="Padding" type="Control" parent="InfoBox/Margin/NinePatchRect/Margin/HBox"]
 margin_left = 720.0

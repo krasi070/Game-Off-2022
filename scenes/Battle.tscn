@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://scripts/battle/BattleStatePreparation.gd" type="Script" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://scenes/ui/EgoCounter.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/backgrounds/centipede_background.png" type="Texture" id=12]
 [ext_resource path="res://scripts/battle/BattleStateStory.gd" type="Script" id=13]
-[ext_resource path="res://assets/resources/sprite_frames/characters/LizardSpriteFrames.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://assets/resources/sprite_frames/characters/CentipedeSpriteFrames.tres" type="SpriteFrames" id=14]
 [ext_resource path="res://scenes/ActionBlockSequence.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/ui/InfoBox.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=17]
@@ -26,6 +26,10 @@
 [ext_resource path="res://assets/resources/shaders/HeroShaderMaterial.tres" type="Material" id=24]
 [ext_resource path="res://assets/resources/shaders/EnemyShaderMaterial.tres" type="Material" id=25]
 [ext_resource path="res://scenes/Squire.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scripts/battle/BattleStateTutorial.gd" type="Script" id=27]
+[ext_resource path="res://scripts/ui/BattleMessage.gd" type="Script" id=28]
+[ext_resource path="res://assets/sprites/ui/ego_empty.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/backgrounds/centipede_background_top.png" type="Texture" id=30]
 
 [sub_resource type="Animation" id=2]
 resource_name = "ui_layer_appear"
@@ -80,7 +84,7 @@ position = Vector2( -1320, 390 )
 scale = Vector2( 1.6, 1.6 )
 frames = ExtResource( 19 )
 animation = "idle"
-frame = 23
+frame = 22
 playing = true
 flip_h = true
 
@@ -93,23 +97,24 @@ animation = "idle"
 
 [node name="EnemyAnimatedSprite" type="AnimatedSprite" parent="Background"]
 visible = false
-position = Vector2( 1110, 390 )
+position = Vector2( 1090, 390 )
 scale = Vector2( 1.6, 1.6 )
 frames = ExtResource( 14 )
 animation = "idle"
-frame = 25
+frame = 10
 playing = true
-flip_h = true
+
+[node name="BackgroundTop" type="Sprite" parent="Background"]
+texture = ExtResource( 30 )
 
 [node name="PlayerSequence" parent="." instance=ExtResource( 15 )]
-position = Vector2( 960, 400 )
+position = Vector2( 947, 400 )
 assigned_to = "Player"
 
 [node name="EnemySequence" parent="." instance=ExtResource( 15 )]
 position = Vector2( 960, 140 )
 assigned_to = "Enemy"
 action_num = 8
-selectable = false
 
 [node name="InfoBox" parent="." instance=ExtResource( 16 )]
 
@@ -166,6 +171,34 @@ margin_right = 380.0
 margin_bottom = 182.0
 assigned_to = "Enemy"
 
+[node name="BattleMessage" type="ColorRect" parent="."]
+margin_left = 600.0
+margin_top = 490.0
+margin_right = 1320.0
+margin_bottom = 562.0
+color = Color( 0, 0, 0, 0.498039 )
+script = ExtResource( 28 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="BattleMessage"]
+margin_left = 17.0
+margin_right = 89.0
+margin_bottom = 72.0
+texture = ExtResource( 29 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BattleMessage"]
+margin_left = 90.0
+margin_top = 10.0
+margin_right = 710.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 620, 50 )
+custom_colors/default_color = Color( 0.72549, 0.615686, 0.368627, 1 )
+bbcode_enabled = true
+bbcode_text = "[center][shake rate=10 level=10]the hero's ego is all dried up[/shake][/center]"
+text = "the hero's ego is all dried up"
+
 [node name="States" type="Node" parent="."]
 
 [node name="Preparation" type="Node" parent="States"]
@@ -173,6 +206,9 @@ script = ExtResource( 2 )
 
 [node name="Story" type="Node" parent="States"]
 script = ExtResource( 13 )
+
+[node name="Tutorial" type="Node" parent="States"]
+script = ExtResource( 27 )
 
 [node name="TurnStart" type="Node" parent="States"]
 script = ExtResource( 3 )

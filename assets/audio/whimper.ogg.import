@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/whimper.ogg-c2b00b672cb6875281ace88375870d11.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/whimper.ogg"
+dest_files=[ "res://.import/whimper.ogg-c2b00b672cb6875281ace88375870d11.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

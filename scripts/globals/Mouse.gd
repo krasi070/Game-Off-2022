@@ -53,10 +53,10 @@ func _check_for_bubble_hover() -> void:
 	var mouse_pos = get_global_mouse_position()
 	var col_arr: Array = space.intersect_point(
 		mouse_pos, 1, [], 0x000001000, false, true)
-	if col_arr:
+	if not is_hovering_over_bubble and col_arr and col_arr[0].collider.get_parent().visible:
 		is_hovering_over_bubble = true
 		emit_signal("hovered_bubble")
-	elif is_hovering_over_bubble:
+	elif is_hovering_over_bubble and (col_arr.empty() or not col_arr[0].collider.get_parent().visible):
 		is_hovering_over_bubble = false
 		emit_signal("exited_bubble")
 
@@ -143,10 +143,8 @@ func _disconnect_from_passive_exit() -> void:
 
 
 func _hovering_over_action_tree_exiting() -> void:
-	print("action going bye")
 	emit_signal("exited_action", "")
 
 
 func _hovering_over_passive_tree_exiting() -> void:
-	print("passive going bye")
 	emit_signal("exited_passive", "")

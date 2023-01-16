@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/sprites/cursors/cursor_examine.png" type="Texture" id=4]
 
 [node name="CursorManager" type="CanvasLayer"]
+pause_mode = 2
+layer = 128
 script = ExtResource( 1 )
 default_cursor = ExtResource( 3 )
 examine_cursor = ExtResource( 4 )
@@ -14,3 +16,4 @@ base_window_size = Vector2( 1920, 1080 )
 base_cursor_size = Vector2( 60, 60 )
 
 [node name="Sprite" type="Sprite" parent="."]
+centered = false

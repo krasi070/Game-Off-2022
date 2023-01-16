@@ -31,13 +31,12 @@ texture = ExtResource( 9 )
 [node name="Characters" type="Sprite" parent="Foreground"]
 texture = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="Foreground"]
+[node name="Label" type="Label" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = -951.042
-margin_top = -675.0
-margin_right = -560.042
-margin_bottom = -619.0
+margin_left = 40.0
+margin_top = 984.0
+margin_bottom = 1052.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "(F) Fullscreen"

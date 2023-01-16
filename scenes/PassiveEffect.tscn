@@ -1,12 +1,72 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/passive_effects/PassiveEffect.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/temp_passives/mood_down.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/temp_passives/neg_passive_bg.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/passives/mood_down.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/passives/negative_passive.png" type="Texture" id=3]
 [ext_resource path="res://assets/resources/passive_effects/EgoBoostPassiveEffect.tres" type="Resource" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="StreamTexture" id=1]
+flags = 5
+load_path = "res://.import/vine.png-4b196299db2af973b38f1a017177746a.stex"
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 41, 41 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("EffectSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EffectSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "active_effect"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("EffectSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EffectSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="PassiveEffect" type="Node2D"]
 position = Vector2( 41, 41 )
@@ -17,17 +77,33 @@ data = ExtResource( 4 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+texture = SubResource( 1 )
+
+[node name="EffectSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 57.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+margin_right = 60.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 0.72549, 0.615686, 0.368627, 1 )
 text = "10"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.498039 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/active_effect = SubResource( 3 )

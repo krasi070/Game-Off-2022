@@ -37,9 +37,12 @@ func play_attacked_anim(attack_frames: SpriteFrames, animation_suffix: String = 
 	anim_player.play("attack_effect" + animation_suffix)
 
 
-func play_empty_mind_anim() -> void:
+func play_nothing_anim(nothing_frames: SpriteFrames) -> void:
+	animated_sprite.frames = nothing_frames
+	animated_sprite.animation = "boil"
+	animated_sprite.playing = true
 	animated_sprite.show()
-	anim_player.play("empty_mind_effect")
+	anim_player.play("nothing_effect")
 
 
 func play_break_chain_anim() -> void:

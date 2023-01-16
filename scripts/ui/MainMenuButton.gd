@@ -22,12 +22,10 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if is_hovered() and was_not_hovering:
-		print(name, " started hover")
 		was_not_hovering = false
 		#CursorManager.set_cursor(Enums.CURSOR_TYPE.SELECT)
 		play_hover_anim()
 	elif not is_hovered() and not was_not_hovering:
-		print(name, " exited")
 		was_not_hovering = true
 		#CursorManager.set_cursor(Enums.CURSOR_TYPE.DEFAULT)
 		play_exit_anim()

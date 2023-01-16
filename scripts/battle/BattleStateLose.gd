@@ -19,15 +19,11 @@ func run(_delta: float) -> void:
 
 
 func _textbox_finished() -> void:
-	# This is temporary, this will only be if player
-	# chooses to goback to main menu.
-	# There should be a retry option.
-	#PlayerStats.reset_to_default()
-	#Transition.transition_to_scene("res://scenes/ui/MainMenu.tscn", false)
 	OptionsLayer.show_game_over()
 	OptionsLayer.show()
 	get_tree().paused = OptionsLayer.visible
 
 
 func _retried() -> void:
+	PlayerStats.reset_next_turn_stats()
 	fsm.state_next = fsm.states.Preparation

@@ -25,6 +25,7 @@ anchor_bottom = 1.0
 margin_right = -929.0
 margin_bottom = -1032.0
 rect_min_size = Vector2( 991, 48 )
+rect_pivot_offset = Vector2( 495, 24 )
 script = ExtResource( 6 )
 
 [node name="Background" type="TextureRect" parent="."]
@@ -52,6 +53,7 @@ valign = 1
 margin_left = 190.0
 margin_right = 881.0
 margin_bottom = 45.0
+mouse_filter = 1
 size_flags_horizontal = 3
 custom_icons/grabber_highlight = ExtResource( 2 )
 custom_icons/grabber = ExtResource( 1 )

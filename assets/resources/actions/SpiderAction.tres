@@ -11,5 +11,6 @@ priority = 1
 execute_again_after = true
 shape = 0
 action_name = "Spider"
-on_hover_text = "non-negatable attack for 1 damage
-squashed if attacked"
+on_hover_text = "non-negatable attack.
+deal 1 damage.
+squashed if received damage."

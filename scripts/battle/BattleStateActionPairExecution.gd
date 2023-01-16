@@ -7,6 +7,7 @@ var is_enemy_action_executed_again: bool
 
 func on_enter() -> void:
 	# Delay timer
+	obj.update_passive_active_anims("ActionPairExecution")
 	print("Execute action in 3")
 	yield(get_tree().create_timer(obj.execution_delay / 3.0), "timeout")
 	print("2")
@@ -17,9 +18,11 @@ func on_enter() -> void:
 	var player_remaining_actions: int = obj.player_seq.actions.size()
 	var enemy_remaining_actions: int = obj.enemy_seq.actions.size()
 	# If equal execute both in priority order
+	AudioController.play_ui_sound(AudioController.POOF_SOUND)
 	if player_remaining_actions == enemy_remaining_actions:
-		var player_priority: int = obj.player_seq.actions[0].data.priority
-		var enemy_priority: int = obj.enemy_seq.actions[0].data.priority
+		# BUG IS HERE
+		var player_priority: int = obj.player_seq.actions[0].final_action.priority
+		var enemy_priority: int = obj.enemy_seq.actions[0].final_action.priority
 		if player_priority > enemy_priority:
 			_execute_player_action()
 			_execute_enemy_action()
@@ -49,8 +52,8 @@ func run(_delta: float) -> void:
 func _execute_player_action(is_second_execution: bool = false) -> void:
 	if not is_second_execution:
 		var player_action: Node2D = obj.player_seq.pop_front_action()
-		player_action_executed = player_action.final_action
-		is_player_action_executed_again = player_action.data.execute_again_after
+		player_action_executed = player_action.final_action.action_type
+		is_player_action_executed_again = player_action.final_action.execute_again_after
 		var player_action_func: String = ActionManager.action_func[player_action_executed]
 		ActionManager.call(player_action_func, PlayerStats, EnemyStats)
 	elif is_player_action_executed_again:
@@ -61,8 +64,8 @@ func _execute_player_action(is_second_execution: bool = false) -> void:
 func _execute_enemy_action(is_second_execution: bool = false) -> void:
 	if not is_second_execution:
 		var enemy_action: Node2D = obj.enemy_seq.pop_front_action()
-		enemy_action_executed = enemy_action.final_action
-		is_enemy_action_executed_again = enemy_action.data.execute_again_after
+		enemy_action_executed = enemy_action.final_action.action_type
+		is_enemy_action_executed_again = enemy_action.final_action.execute_again_after
 		var enemy_action_func: String = ActionManager.action_func[enemy_action_executed]
 		ActionManager.call(enemy_action_func, EnemyStats, PlayerStats)
 	elif is_enemy_action_executed_again:

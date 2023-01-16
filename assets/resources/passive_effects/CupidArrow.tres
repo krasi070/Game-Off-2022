@@ -7,8 +7,12 @@
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 passive_effect_type = 5
-on_hover_text = "change all opponent empty mind actions to enchanted actions on turn start"
+passive_name = "Love Enchanment"
+on_hover_text = "change all opponent EMPTY MIND actions to ENCHANTED actions on turn start."
+signal_to_emit_on_click = ""
 is_permanent = true
 is_positive = true
+is_clickable = false
+is_active_by_default = true
 associated_number = 0
 remove_on_zero = false

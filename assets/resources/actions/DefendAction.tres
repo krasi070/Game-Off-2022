@@ -11,4 +11,4 @@ priority = 1
 execute_again_after = false
 shape = 0
 action_name = "Defend"
-on_hover_text = "negate attack damage"
+on_hover_text = "negate received damage."

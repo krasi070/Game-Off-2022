@@ -11,4 +11,4 @@ priority = 0
 execute_again_after = false
 shape = 0
 action_name = "Attack Up"
-on_hover_text = "deal plus 1 attack damage for the rest of the turn"
+on_hover_text = "deal plus 1 damage for the rest of the turn."

@@ -23,28 +23,53 @@ texture = ExtResource( 2 )
 margin_left = 88.0
 margin_right = 160.0
 margin_bottom = 72.0
+rect_pivot_offset = Vector2( 36, 36 )
 texture = ExtResource( 3 )
+
+[node name="EffectSprite" type="Sprite" parent="Icon1"]
+texture = ExtResource( 3 )
+centered = false
 
 [node name="Icon2" type="TextureRect" parent="."]
 margin_left = 160.0
 margin_right = 232.0
 margin_bottom = 72.0
+rect_pivot_offset = Vector2( 36, 36 )
 texture = ExtResource( 3 )
+
+[node name="EffectSprite" type="Sprite" parent="Icon2"]
+texture = ExtResource( 3 )
+centered = false
 
 [node name="Icon3" type="TextureRect" parent="."]
 margin_left = 232.0
 margin_right = 304.0
 margin_bottom = 72.0
+rect_pivot_offset = Vector2( 36, 36 )
 texture = ExtResource( 3 )
+
+[node name="EffectSprite" type="Sprite" parent="Icon3"]
+texture = ExtResource( 3 )
+centered = false
 
 [node name="Icon4" type="TextureRect" parent="."]
 margin_left = 304.0
 margin_right = 376.0
 margin_bottom = 72.0
+rect_pivot_offset = Vector2( 36, 36 )
 texture = ExtResource( 3 )
+
+[node name="EffectSprite" type="Sprite" parent="Icon4"]
+texture = ExtResource( 3 )
+centered = false
 
 [node name="Icon5" type="TextureRect" parent="."]
 margin_left = 376.0
 margin_right = 448.0
 margin_bottom = 72.0
+rect_pivot_offset = Vector2( 36, 36 )
 texture = ExtResource( 3 )
+
+[node name="EffectSprite" type="Sprite" parent="Icon5"]
+texture = ExtResource( 3 )
+centered = false

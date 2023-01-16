@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/ui/TextEffect.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Game-Regular-Text-Effect.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/resources/sprite_frames/actions/DefendSpriteFrames.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://assets/resources/sprite_frames/actions/EnchantedSpriteFrames.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://assets/resources/sprite_frames/actions/NothingSpriteFrames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://assets/resources/sprite_frames/actions/SelfEsteemSpriteFrames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://assets/resources/sprite_frames/actions/AttackUpSpriteFrames.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://assets/resources/sprite_frames/actions/BreakChainSpriteFrames.tres" type="SpriteFrames" id=9]
@@ -538,45 +537,6 @@ tracks/2/keys = {
 "values": [ ExtResource( 3 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "empty_mind_effect"
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1.5, 1.5 ), Vector2( 3, 3 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:frames")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 5 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
 [sub_resource type="Animation" id=11]
 resource_name = "enchanted_effect"
 tracks/0/type = "value"
@@ -706,6 +666,33 @@ tracks/2/keys = {
 "values": [ Vector2( -252, -151 ), Vector2( -252, -551 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "nothing_effect"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 3, 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="TextEffect" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -747,6 +734,7 @@ valign = 1
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
 animation = "boil"
+frame = 1
 playing = true
 flip_h = true
 
@@ -760,7 +748,7 @@ anims/break_chain_effect = SubResource( 14 )
 anims/damaged_effect = SubResource( 2 )
 anims/defended_effect = SubResource( 3 )
 anims/defended_effect2 = SubResource( 4 )
-anims/empty_mind_effect = SubResource( 7 )
 anims/enchanted_effect = SubResource( 11 )
 anims/heal_effect = SubResource( 12 )
 anims/healed_amount_effect = SubResource( 13 )
+anims/nothing_effect = SubResource( 7 )

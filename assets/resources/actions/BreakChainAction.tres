@@ -10,5 +10,5 @@ action_type = 6
 priority = 0
 execute_again_after = false
 shape = 1
-action_name = "Snap Chain"
-on_hover_text = "break chain of opponent action"
+action_name = "Break Chain"
+on_hover_text = "break the chain the opponent action is in."

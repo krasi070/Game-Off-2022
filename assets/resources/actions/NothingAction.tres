@@ -10,6 +10,5 @@ action_type = 2
 priority = 0
 execute_again_after = false
 shape = 2
-action_name = "Emty Head"
-on_hover_text = "mind is empty
-do nothing"
+action_name = "Empty Mind"
+on_hover_text = "do nothing."

@@ -15,7 +15,7 @@ var selectable: bool = true
 var is_locked: bool = false
 var selected: bool = false
 var is_doubled: bool = false
-var final_action: int
+var final_action: Resource
 
 var tweens: Dictionary = {
 	"hover": null,
@@ -51,7 +51,7 @@ func set_sprite_data() -> void:
 	effect_sprite.frames = data.action_sprite_frames
 	effect_sprite.animation = "boil"
 	effect_sprite.playing = true
-	final_action = data.action_type
+	final_action = data
 
 
 func update_after_swap() -> void:
@@ -117,7 +117,7 @@ func change_to(to_action_data: Resource) -> void:
 	poof_animted_sprite.frame = 0
 	poof_animted_sprite.speed_scale = SpeedManager.speed
 	poof_animted_sprite.playing = true
-	final_action = to_action_data.action_type
+	final_action = to_action_data
 	top_action_animated_sprite.frames = to_action_data.action_sprite_frames
 	top_action_animated_sprite.animation = "boil"
 	top_action_animated_sprite.playing = true
@@ -158,37 +158,42 @@ func play_exit_anim() -> void:
 
 func play_select_anim() -> void:
 	_stop_tween("unselect")
-	var percentage: float = _get_percentage(0, SELECT_Y_OFFSET, top_sprites.position.y)
+	var percentage: float = _get_percentage(0, SELECT_Y_OFFSET, position.y)
 	tweens["select"] = create_tween()
 	tweens["select"].tween_property(
-		top_sprites, 
+		self, 
 		"position", 
-		Vector2(0, SELECT_Y_OFFSET), 
+		Vector2(position.x, SELECT_Y_OFFSET), 
 		SELECT_ANIM_DURATION * percentage)
 
 
 func play_unselect_anim() -> void:
 	_stop_tween("select")
-	var percentage: float = _get_percentage(SELECT_Y_OFFSET, 0, top_sprites.position.y)
+	var percentage: float = _get_percentage(SELECT_Y_OFFSET, 0, position.y)
 	tweens["unselect"] = create_tween()
 	tweens["unselect"].tween_property(
-		top_sprites, 
+		self, 
 		"position", 
-		Vector2.ZERO, 
+		Vector2(position.x, 0), 
 		SELECT_ANIM_DURATION * percentage)
+
+
+func unselect() -> void:
+	self.position = Vector2(position.x, 0)
+	selected = false
 
 
 # Return anim duration
 func play_before_swap_anim() -> float:
 	var tween: SceneTreeTween = create_tween()
-	tween.tween_property(top_sprites, "modulate", Color.transparent, SWAP_ANIM_DURATION)
+	tween.tween_property(self, "modulate", Color.transparent, SWAP_ANIM_DURATION)
 	return SWAP_ANIM_DURATION
 
 
 # Return anim duration
 func play_after_swap_anim() -> float:
 	var tween: SceneTreeTween = create_tween()
-	tween.tween_property(top_sprites, "modulate", Color.white, SWAP_ANIM_DURATION)
+	tween.tween_property(self, "modulate", Color.white, SWAP_ANIM_DURATION)
 	return SWAP_ANIM_DURATION
 
 

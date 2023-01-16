@@ -11,4 +11,4 @@ priority = 1
 execute_again_after = false
 shape = 0
 action_name = "Heal"
-on_hover_text = "plus 1 health"
+on_hover_text = "plus 1 health."

@@ -65,9 +65,9 @@ func play_attack_anim(attack_frames: SpriteFrames) -> void:
 	anim_player.play("attack" + anim_name_suffix)
 
 
-func play_empty_mind_anim() -> void:
+func play_nothing_anim(nothing_frames: SpriteFrames) -> void:
 	var instance: Control = _create_text_effect_instance(non_center_spawn_point.global_position)
-	instance.play_empty_mind_anim()
+	instance.play_nothing_anim(nothing_frames)
 
 
 func play_break_chain_anim() -> void:
@@ -76,7 +76,7 @@ func play_break_chain_anim() -> void:
 
 
 func play_hurt_anim(damage: int) -> void:
-	yield(get_tree().create_timer(wait_time), "timeout")
+	yield(get_tree().create_timer(WAIT_TIME_DEFAULT / SpeedManager.speed), "timeout")
 	var instance: Control = _create_text_effect_instance(non_center_spawn_point.global_position)
 	instance.play_damaged_anim(damage)
 	anim_player.play("hurt" + anim_name_suffix)
@@ -144,9 +144,9 @@ func _unit_defended() -> void:
 		play_defended_anim()
 
 
-func _unit_did_nothing() -> void:
+func _unit_did_nothing(nothing_frames: SpriteFrames) -> void:
 	if anim_active:
-		play_empty_mind_anim()
+		play_nothing_anim(nothing_frames)
 
 
 func _unit_broke_chain() -> void:

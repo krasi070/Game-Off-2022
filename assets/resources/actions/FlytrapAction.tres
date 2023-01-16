@@ -11,4 +11,4 @@ priority = -1
 execute_again_after = false
 shape = 2
 action_name = "Flytrap"
-on_hover_text = "plus 1 health if opponent action has flies on it"
+on_hover_text = "plus 1 health if opponent action has flies on it."

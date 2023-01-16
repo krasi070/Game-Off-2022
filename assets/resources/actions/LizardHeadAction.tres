@@ -10,5 +10,5 @@ action_type = 17
 priority = 0
 execute_again_after = false
 shape = 0
-action_name = "Lizard Head"
-on_hover_text = "attack for 5 damage"
+action_name = "Spiky Helmet"
+on_hover_text = "deal 5 damage."

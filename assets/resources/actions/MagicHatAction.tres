@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scripts/resources/ActionBlockData.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/sprite_frames/actions/MagicHatSpriteFrames.tres" type="SpriteFrames" id=2]
+
+[resource]
+script = ExtResource( 1 )
+action_sprite_frames = ExtResource( 2 )
+action_type = 18
+priority = 0
+execute_again_after = false
+shape = 0
+action_name = "Witch Hat"
+on_hover_text = "On turn end change to a random action."

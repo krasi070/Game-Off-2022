@@ -3,16 +3,21 @@ class_name PassiveEffectData
 
 # Sprite data
 export(Texture) var texture
+export(SpriteFrames) var sprite_frames
 
 # Enums
 export(Enums.PASSIVE_EFFECT_TYPE) var passive_effect_type
 
 # Text to display on hover
+export(String) var passive_name
 export(String, MULTILINE) var on_hover_text
 
 # Other data
+export(String) var signal_to_emit_on_click
 export(bool) var is_permanent
 export(bool) var is_positive
+export(bool) var is_clickable = false
+export(bool) var is_active_by_default = false
 export(int) var associated_number
 export(bool) var remove_on_zero
 

@@ -11,5 +11,5 @@ priority = 1
 execute_again_after = true
 shape = 2
 action_name = "Parry"
-on_hover_text = "(parry) negate damage
-if negated deal it back"
+on_hover_text = "negate received damage.
+if negated, deal it back."

@@ -10,6 +10,6 @@ action_type = 4
 priority = 1
 execute_again_after = false
 shape = 1
-action_name = ""
-on_hover_text = "plus 1 ego
-damage received is doubled"
+action_name = "Confidence"
+on_hover_text = "plus 1 ego (max once per turn).
+damage received is doubled."

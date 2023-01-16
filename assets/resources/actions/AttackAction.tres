@@ -10,5 +10,5 @@ action_type = 0
 priority = 0
 execute_again_after = false
 shape = 1
-action_name = "Attack"
-on_hover_text = "attack for 1 damage"
+action_name = "basic attack"
+on_hover_text = "deal 1 damage."

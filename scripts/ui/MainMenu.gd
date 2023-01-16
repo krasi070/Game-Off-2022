@@ -45,6 +45,7 @@ func _set_hovering_to_false() -> void:
 
 func _start_journey_button_pressed() -> void:
 	button_container.hide()
+	AudioController.play_ui_sound(AudioController.BUBBLE_CLICK_SOUND)
 	_set_hovering_to_false()
 	TextBox.queue_entry({ "name": "Squire", "body": "We're on our way to our first castle..." })
 	TextBox.queue_entry({ "name": "Squire", "body": "I was ecstatic that the village hero invited me on his next adventure." })
@@ -54,20 +55,26 @@ func _start_journey_button_pressed() -> void:
 
 
 func _button_mouse_entered(_name: String) -> void:
+	if not is_hovering_on_button[_name]:
+		AudioController.play_ui_sound(AudioController.BUBBLE_HOVER_SOUND)
+		print("Mouse enter sound: ", _name)
 	is_hovering_on_button[_name] = true
 
 
 func _button_mouse_exited(_name: String) -> void:
+	print("Mouse exited sound: ", _name)
 	is_hovering_on_button[_name] = false
 
 
 func _options_button_pressed() -> void:
+	AudioController.play_ui_sound(AudioController.BUBBLE_CLICK_SOUND)
 	OptionsLayer.show_settings()
 	OptionsLayer.show()
 	get_tree().paused = true
 
 
 func _quit_button_pressed() -> void:
+	AudioController.play_ui_sound(AudioController.BUBBLE_CLICK_SOUND)
 	get_tree().quit()
 
 
