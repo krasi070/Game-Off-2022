@@ -165,9 +165,15 @@ func exec_flytrap(from: UnitStats, to: UnitStats) -> void:
 	print("FLYTRAP from %s" % from.character_name)
 
 
-func exec_nothing(from: UnitStats, _to: UnitStats) -> void:
+func exec_nothing(from: UnitStats, to: UnitStats) -> void:
+	var fly_wave_dmg: int = 1
 	from.temp_stats["flies"] = true
-	from.did_nothing(data_by_action[Enums.ACTION_TYPE.NOTHING].action_sprite_frames)
+	if from.has_passive(Enums.PASSIVE_EFFECT_TYPE.FLY_WAVE) and \
+		to.temp_stats.has("flies") and to.temp_stats["flies"]:
+		from.hurt(fly_wave_dmg)
+		print("- %s took %d fly wave damage" % [from.character_name, fly_wave_dmg])
+	else:
+		from.did_nothing(data_by_action[Enums.ACTION_TYPE.NOTHING].action_sprite_frames)
 	print("NOTHING from %s" % from.character_name)
 
 

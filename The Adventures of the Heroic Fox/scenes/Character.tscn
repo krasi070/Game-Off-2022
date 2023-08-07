@@ -827,6 +827,7 @@ animation = "idle"
 scale = Vector2( 1.6, 1.6 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 2
 
 [node name="LeftTextSpawnPoint" type="Position2D" parent="."]
 position = Vector2( -450, 0 )

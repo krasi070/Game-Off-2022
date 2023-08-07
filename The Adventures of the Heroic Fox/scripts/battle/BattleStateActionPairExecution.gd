@@ -23,7 +23,7 @@ func on_enter() -> void:
 		# BUG IS HERE
 		var player_priority: int = obj.player_seq.actions[0].final_action.priority
 		var enemy_priority: int = obj.enemy_seq.actions[0].final_action.priority
-		if player_priority > enemy_priority:
+		if player_priority >= enemy_priority:
 			_execute_player_action()
 			_execute_enemy_action()
 			_execute_player_action(true)

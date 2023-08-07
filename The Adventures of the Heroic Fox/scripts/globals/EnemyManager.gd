@@ -201,16 +201,24 @@ var enemies: Array = [
 	},
 	{
 		"name": "Transcended Lizard",
-		"health": 1,
+		"health": 101,
 		"frames": load("res://assets/resources/sprite_frames/characters/LizardSpriteFrames.tres"),
 		"background": load("res://assets/sprites/backgrounds/lizard_background.png"),
 		"battle_pos": Vector2(1110, 390),
 		"flip_h": true,
 		"start_story": LizardStories.start_story,
+		"end_story": LizardStories.end_story,
 		"phase_stories": [],
-		"phases": [[]],
+		"phases": [
+			# Phase test sequences
+			[
+				[2, 2, 2, 2, 2]
+			],
+		],
 		"passives": [
 			Enums.PASSIVE_EFFECT_TYPE.FOURTH_DIMENSION,
+			Enums.PASSIVE_EFFECT_TYPE.FLY_WAVE,
+			Enums.PASSIVE_EFFECT_TYPE.FRIENDSHIP,
 		]
 	},
 ]

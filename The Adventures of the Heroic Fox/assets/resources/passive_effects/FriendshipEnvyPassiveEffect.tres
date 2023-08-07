@@ -1,19 +1,19 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://scripts/resources/PassiveEffectData.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/passives/fourth_dimension.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/passives/friendship.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
-passive_effect_type = 7
-passive_name = "4th Dimensional Being"
-on_hover_text = "plus 100 max health.
-(due to big brain)"
+passive_effect_type = 8
+passive_name = "Friendship Envy"
+on_hover_text = "on squire encouring the hero,
+take 10 damage."
 signal_to_emit_on_click = ""
 is_permanent = true
-is_positive = true
+is_positive = false
 is_clickable = false
-is_active_by_default = true
+is_active_by_default = false
 associated_number = 0
 remove_on_zero = false

@@ -84,8 +84,8 @@ func _connect_buttons() -> void:
 
 
 func _setup_speed_slider() -> void:
-	speed_slider.set_max(5)
-	speed_slider.set_min(1)
+	speed_slider.set_max(10)
+	speed_slider.set_min(0.5)
 	speed_slider.set_step(0.5)
 	speed_slider.set_value(SpeedManager.speed)
 	speed_slider.set_label("battle speed")

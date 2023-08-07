@@ -1,5 +1,7 @@
 extends FSMState
 
+const DEFAULT_PASSIVE_DAMAGE: int = 10
+
 var has_post_plan_ability: bool 
 
 func on_enter() -> void:
@@ -54,6 +56,9 @@ func _handle_post_plan_passives() -> void:
 	if EnemyStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.CHAIN_HEALTH):
 		_chain_heal(EnemyStats, obj.enemy_seq, obj.enemy_character)
 		has_post_plan_ability = true
+	if EnemyStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.FRIENDSHIP):
+		_take_damage(EnemyStats, obj.enemy_character, DEFAULT_PASSIVE_DAMAGE)
+		has_post_plan_ability = true
 
 
 func _chain_heal(unit: UnitStats, seq: Node2D, character: Node2D) -> void:
@@ -62,3 +67,8 @@ func _chain_heal(unit: UnitStats, seq: Node2D, character: Node2D) -> void:
 	unit.health += chain_sum
 	var added: int = unit.health - health_before
 	character.play_healed_anim(unit.passives_dict[Enums.PASSIVE_EFFECT_TYPE.CHAIN_HEALTH].sprite_frames, added)
+
+
+func _take_damage(unit: UnitStats, character: Node2D, damage: int) -> void:
+	unit.health -= damage
+	character.play_hurt_anim(damage)

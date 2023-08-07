@@ -136,6 +136,17 @@ func set_passive_effect_anim_activations(unit: UnitStats, seq: Node2D, container
 	if is_instance_valid(rage_passive):
 		rage_passive.set_active(unit.health <= unit.max_health / 3.0)
 	
+	# Fly Wave
+	var fly_wave_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.FLY_WAVE)
+	if is_instance_valid(fly_wave_passive):
+		fly_wave_passive.set_active(state == "ActionPairExecution" or state == "AfterExecution")
+	
+	# Friendship Envy
+	var friendship_envy_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.FRIENDSHIP)
+	if is_instance_valid(friendship_envy_passive):
+		friendship_envy_passive.set_active(state == "TurnStart" or state == "Planning" or state == "PostPlanning")
 
 
 func update_passive_active_anims(state: String) -> void:

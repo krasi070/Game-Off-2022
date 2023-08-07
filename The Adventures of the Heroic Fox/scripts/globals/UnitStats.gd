@@ -45,6 +45,8 @@ var passives_dict: Dictionary = {
 	Enums.PASSIVE_EFFECT_TYPE.FOURTH_DIMENSION: load("res://assets/resources/passive_effects/FourthDimensionPassiveEffect.tres"),
 	Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR: load("res://assets/resources/passive_effects/PlotArmorPassiveEffect.tres"),
 	Enums.PASSIVE_EFFECT_TYPE.PLUS_FLY: load("res://assets/resources/passive_effects/PlusOneFlyActionPassiveEffect.tres"),
+	Enums.PASSIVE_EFFECT_TYPE.FLY_WAVE: load("res://assets/resources/passive_effects/FlyWavePassiveEffect.tres"),
+	Enums.PASSIVE_EFFECT_TYPE.FRIENDSHIP: load("res://assets/resources/passive_effects/FriendshipEnvyPassiveEffect.tres"),
 }
 
 func set_health(new_health: int) -> void:
