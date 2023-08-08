@@ -18,6 +18,8 @@ var unlocked_actions: Array = [
 	load("res://assets/resources/actions/AttackAction.tres"),
 	load("res://assets/resources/actions/DefendAction.tres"),
 	load("res://assets/resources/actions/NothingAction.tres"),
+	#load("res://assets/resources/actions/AttackUpAction.tres"),
+	#load("res://assets/resources/actions/PoisonAction.tres"),
 ]
 
 var unlocked_passives: Array = []

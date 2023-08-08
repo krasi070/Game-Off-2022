@@ -61,7 +61,6 @@ position = Vector2( 35, 30 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 3 )
 animation = "boil"
-frame = 1
 playing = true
 centered = false
 
@@ -70,7 +69,6 @@ position = Vector2( 35, 30 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
 animation = "boil"
-frame = 1
 playing = true
 centered = false
 

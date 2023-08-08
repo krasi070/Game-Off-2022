@@ -37,6 +37,8 @@ var data_by_action: Dictionary = {
 		preload("res://assets/resources/actions/MagicHatAction.tres"),
 	Enums.ACTION_TYPE.THINKING:
 		preload("res://assets/resources/actions/ThinkingAction.tres"),
+	Enums.ACTION_TYPE.POISON:
+		preload("res://assets/resources/actions/PoisonAction.tres"),
 }
 
 var action_func: Dictionary = {
@@ -58,7 +60,13 @@ var action_func: Dictionary = {
 	Enums.ACTION_TYPE.LIZARD_HEAD: "exec_lizard_head",
 	#Enums.ACTION_TYPE.MAGIC_HAT: "exec_magic_hat",
 	Enums.ACTION_TYPE.THINKING: "exec_thinking",
+	Enums.ACTION_TYPE.POISON: "exec_poison",
 }
+
+func pre_exec_setup(from: UnitStats, _to: UnitStats, type: int) -> void:
+	if type != Enums.ACTION_TYPE.POISON:
+		from.turn_stats["poison_stack"] = 0
+
 
 func exec_attack(from: UnitStats, to: UnitStats) -> void:
 	var dealt_damage: int = _exec_attack_helper(from, to, 1)
@@ -231,6 +239,16 @@ func exec_attack_up(from: UnitStats, _to: UnitStats) -> void:
 	from.turn_stats["damage_bonus"] += 1
 	from.used_attack_up()
 	print("ATTACK UP from %s" % from.character_name)
+
+
+func exec_poison(from: UnitStats, to: UnitStats) -> void:
+	if not from.turn_stats.has("poison_stack"):
+		from.turn_stats["poison_stack"] = 0
+	var dealt_damage: int = _exec_attack_helper(from, to, from.turn_stats["poison_stack"])
+	from.attacked(data_by_action[Enums.ACTION_TYPE.POISON].action_sprite_frames)
+	to.hurt(dealt_damage)
+	print("POISON (%d) from %s" % [from.turn_stats["poison_stack"], from.character_name])
+	from.turn_stats["poison_stack"] = min(from.turn_stats["poison_stack"] + 1, 5)
 
 
 func _exec_attack_helper(from: UnitStats, to: UnitStats, damage: int) -> int:

@@ -1,6 +1,6 @@
 extends Node
 
-const LAST_ENEMY: int = 4
+const LAST_ENEMY: int = 5
 
 var curr_enemy_index: int = 0
 
@@ -142,6 +142,7 @@ var enemies: Array = [
 		"background_top": load("res://assets/sprites/backgrounds/centipede_background_top.png"),
 		"battle_pos": Vector2(1130, 390),
 		"start_story": CentipedeStories.start_story,
+		"end_story": CentipedeStories.end_story,
 		"phase_stories": [],
 		"phases": [
 			[

@@ -3,9 +3,10 @@ extends Node
 var choices: Array = [
 	null,
 	load("res://assets/resources/choices/FirstChoice.tres"),
-	load("res://assets/resources/choices/ThirdChoice.tres"),
 	load("res://assets/resources/choices/SecondChoice.tres"),
-	load("res://assets/resources/choices/FitfhChoice.tres"),
+	load("res://assets/resources/choices/ThirdChoice.tres"),
+	load("res://assets/resources/choices/FourthChoice.tres"),
+	load("res://assets/resources/choices/FifthChoice.tres"),
 ]
 
 var action_tutorial: Array = [

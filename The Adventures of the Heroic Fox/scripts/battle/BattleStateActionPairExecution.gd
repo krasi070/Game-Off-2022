@@ -54,6 +54,7 @@ func _execute_player_action(is_second_execution: bool = false) -> void:
 		var player_action: Node2D = obj.player_seq.pop_front_action()
 		player_action_executed = player_action.final_action.action_type
 		is_player_action_executed_again = player_action.final_action.execute_again_after
+		ActionManager.pre_exec_setup(PlayerStats, EnemyStats, player_action_executed)
 		var player_action_func: String = ActionManager.action_func[player_action_executed]
 		ActionManager.call(player_action_func, PlayerStats, EnemyStats)
 	elif is_player_action_executed_again:
@@ -66,6 +67,7 @@ func _execute_enemy_action(is_second_execution: bool = false) -> void:
 		var enemy_action: Node2D = obj.enemy_seq.pop_front_action()
 		enemy_action_executed = enemy_action.final_action.action_type
 		is_enemy_action_executed_again = enemy_action.final_action.execute_again_after
+		ActionManager.pre_exec_setup(EnemyStats, PlayerStats, enemy_action_executed)
 		var enemy_action_func: String = ActionManager.action_func[enemy_action_executed]
 		ActionManager.call(enemy_action_func, EnemyStats, PlayerStats)
 	elif is_enemy_action_executed_again:

@@ -5,3 +5,7 @@ var start_story: Array = [
 	Helper.to_entry("Centiworm", "I'm a centiworm!"),
 	Helper.to_entry("Squire", "Here we go..."),
 ]
+
+var end_story: Array = [
+	Helper.to_entry("Centiworm", "Dead!"),
+]
