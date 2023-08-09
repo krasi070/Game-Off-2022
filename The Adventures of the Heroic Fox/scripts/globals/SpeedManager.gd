@@ -2,7 +2,7 @@ extends Node
 
 signal changed_speed()
 
-var speed: float = 2
+var speed: float = 4
 
 func set_speed(_speed: float) -> void:
 	speed = _speed

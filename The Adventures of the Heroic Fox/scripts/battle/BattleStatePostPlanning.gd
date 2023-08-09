@@ -56,7 +56,8 @@ func _handle_post_plan_passives() -> void:
 	if EnemyStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.CHAIN_HEALTH):
 		_chain_heal(EnemyStats, obj.enemy_seq, obj.enemy_character)
 		has_post_plan_ability = true
-	if EnemyStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.FRIENDSHIP):
+	if EnemyStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.FRIENDSHIP) and \
+		PlayerStats.has_passive(Enums.PASSIVE_EFFECT_TYPE.EGO_BOOST):
 		_take_damage(EnemyStats, obj.enemy_character, DEFAULT_PASSIVE_DAMAGE)
 		has_post_plan_ability = true
 

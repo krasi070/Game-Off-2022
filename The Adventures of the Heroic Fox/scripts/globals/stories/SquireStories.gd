@@ -96,6 +96,13 @@ var intermission_beginnings: Dictionary = {
 		Helper.to_entry("Squire", "or would healing be more beneficial?"),
 	],
 	4: [
-		Helper.to_entry("Squire", "Plot armor or more flies?"),
-	]
+		Helper.to_entry("Squire", "Should I teach the hero what plot armor is..."),
+		Helper.to_entry("Squire", "or should I expand his planning extents?"),
+	],
+	5: [
+		Helper.to_entry("Squire", "We finally know where the princess is!"),
+		Helper.to_entry("Squire", "The hero needs some more attack power for this last battle."),
+		Helper.to_entry("Squire", "Should I teach the hero how to increase the strength of his current attacks..."),
+		Helper.to_entry("Squire", "or teach him a new deadly attack type."),
+	],
 }

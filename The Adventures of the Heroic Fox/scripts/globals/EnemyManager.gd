@@ -143,13 +143,36 @@ var enemies: Array = [
 		"battle_pos": Vector2(1130, 390),
 		"start_story": CentipedeStories.start_story,
 		"end_story": CentipedeStories.end_story,
-		"phase_stories": [],
+		"phase_stories": [
+			{ "threshold": 20, "story_entries": CentipedeStories.phase2_story },
+		],
 		"phases": [
+#				ATTACK = 0, tri
+#				DEFEND = 1, circ
+#				BREAK_CHAIN = 6, tri
+#				CLAW = 7, sq
+#				FLYTRAP = 10, sq
+#				PARRY = 13, sq
+			# Phase 1 sequences
+			[
+				[10, 13, 6, 13, 10, 6, 10],
+				[1, 13, 13, 13, 10, 6, 6],
+				[13, 0, 1, 1, 0, 10, 13],
+				[1, 10, 0, 0, 0, 10, 6],
+				[1, 1, 0, 6, 1, 1, 10],
+				[6, 0, 10, 0, 13, 10, 10],
+				[10, 10, 10, 6, 13, 13, 0],
+			],
+			# Phase 2 sequences
 			[
 				[10, 10, 0, 6, 13, 0, 10],
 				[6, 10, 10, 0, 13, 7, 6],
 				[7, 0, 10, 13, 10, 0, 10],
 				[0, 7, 7, 10, 10, 6, 10],
+				[10, 6, 10, 7, 10, 10, 10],
+				[0, 13, 10, 10, 13, 10, 10],
+				[6, 6, 0, 13, 10, 6, 10],
+				[7, 6, 13, 13, 6, 10, 7],
 			]
 		],
 		"passives": [
@@ -213,7 +236,7 @@ var enemies: Array = [
 		"phases": [
 			# Phase test sequences
 			[
-				[2, 2, 2, 2, 2]
+				[2, 2, 2, 2, 2, 2, 2, 2]
 			],
 		],
 		"passives": [

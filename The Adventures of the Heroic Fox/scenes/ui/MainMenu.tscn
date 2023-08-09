@@ -54,6 +54,9 @@ rect_scale = Vector2( 0.96, 0.96 )
 rect_pivot_offset = Vector2( 504, 166 )
 texture_normal = ExtResource( 3 )
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="BeginJourneyRichTextLabel" type="RichTextLabel" parent="ButtonContainer/StartJourneyButton"]
 anchor_top = 0.5
@@ -90,6 +93,9 @@ rect_scale = Vector2( 0.96, 0.96 )
 rect_pivot_offset = Vector2( 397.5, 166 )
 texture_normal = ExtResource( 4 )
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="OptionsRichTextLabel" type="RichTextLabel" parent="ButtonContainer/OptionsButton"]
 anchor_top = 0.5
@@ -125,6 +131,9 @@ rect_scale = Vector2( 0.96, 0.96 )
 rect_pivot_offset = Vector2( 208, 105 )
 texture_normal = ExtResource( 5 )
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="QuitRichTextLabel" type="RichTextLabel" parent="ButtonContainer/QuitButton"]
 anchor_top = 0.5
