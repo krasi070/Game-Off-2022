@@ -9,7 +9,7 @@ texture = ExtResource( 2 )
 passive_effect_type = 8
 passive_name = "Friendship Envy"
 on_hover_text = "on squire encouring the hero,
-take 10 damage."
+take 5 damage."
 signal_to_emit_on_click = ""
 is_permanent = true
 is_positive = false

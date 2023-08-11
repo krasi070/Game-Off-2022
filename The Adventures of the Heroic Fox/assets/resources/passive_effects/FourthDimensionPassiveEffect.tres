@@ -9,6 +9,7 @@ texture = ExtResource( 2 )
 passive_effect_type = 7
 passive_name = "4th Dimensional Being"
 on_hover_text = "plus 100 max health.
+access to any action.
 (due to big brain)"
 signal_to_emit_on_click = ""
 is_permanent = true

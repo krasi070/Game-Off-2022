@@ -84,7 +84,7 @@ position = Vector2( -1320, 390 )
 scale = Vector2( 1.6, 1.6 )
 frames = ExtResource( 19 )
 animation = "idle"
-frame = 10
+frame = 18
 playing = true
 flip_h = true
 
@@ -101,7 +101,7 @@ position = Vector2( 1090, 390 )
 scale = Vector2( 1.6, 1.6 )
 frames = ExtResource( 14 )
 animation = "idle"
-frame = 19
+frame = 3
 playing = true
 
 [node name="BackgroundTop" type="Sprite" parent="Background"]

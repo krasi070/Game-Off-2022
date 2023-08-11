@@ -1,6 +1,6 @@
 extends FSMState
 
-const DEFAULT_PASSIVE_DAMAGE: int = 10
+const DEFAULT_PASSIVE_DAMAGE: int = 5
 
 var has_post_plan_ability: bool 
 

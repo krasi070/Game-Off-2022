@@ -147,12 +147,6 @@ var enemies: Array = [
 			{ "threshold": 20, "story_entries": CentipedeStories.phase2_story },
 		],
 		"phases": [
-#				ATTACK = 0, tri
-#				DEFEND = 1, circ
-#				BREAK_CHAIN = 6, tri
-#				CLAW = 7, sq
-#				FLYTRAP = 10, sq
-#				PARRY = 13, sq
 			# Phase 1 sequences
 			[
 				[10, 13, 6, 13, 10, 6, 10],
@@ -232,11 +226,43 @@ var enemies: Array = [
 		"flip_h": true,
 		"start_story": LizardStories.start_story,
 		"end_story": LizardStories.end_story,
-		"phase_stories": [],
+		"phase_stories": [
+			{ "threshold": 70, "story_entries": LizardStories.phase2_story },
+			{ "threshold": 35, "story_entries": LizardStories.phase3_story },
+		],
 		"phases": [
-			# Phase test sequences
+			# Phase 1 sequences
 			[
-				[2, 2, 2, 2, 2, 2, 2, 2]
+				[1, 2, 1, 2, 0, 0, 2, 2],
+				[2, 2, 2, 13, 6, 0, 1, 1],
+				[0, 0, 2, 0, 2, 2, 1, 2],
+				[6, 16, 16, 2, 1, 2, 2, 13],
+				[2, 16, 1, 16, 16, 6, 2, 2],
+				[16, 0, 2, 16, 1, 1, 2, 6],
+				[0, 0, 2, 2, 0, 0, 2, 2],
+				[13, 2, 13, 2, 0, 1, 1, 0],
+			],
+			# Phase 2 sequences
+			[
+				[2, 2, 2, 6, 6, 2, 2, 2],
+				[13, 15, 13, 2, 2, 1, 1, 1],
+				[2, 2, 13, 13, 8, 2, 1, 2],
+				[2, 13, 2, 2, 13, 13, 2, 13],
+				[1, 2, 8, 1, 2, 2, 1, 7],
+				[1, 13, 13, 2, 1, 2, 1, 15],
+				[1, 1, 8, 1, 1, 13, 2, 2],
+				[7, 2, 2, 2, 6, 13, 2, 13],
+			],
+			# Phase 3 sequences
+			[
+				[2, 2, 17, 2, 2, 13, 2, 1],
+				[1, 1, 2, 17, 1, 6, 2, 2],
+				[13, 2, 13, 2, 2, 13, 13, 2],
+				[1, 2, 1, 1, 1, 2, 1, 2],
+				[2, 2, 2, 2, 13, 1, 17, 1],
+				[13, 13, 2, 6, 2, 6, 13, 2],
+				[17, 3, 2, 1, 1, 1, 13, 6],
+				[1, 2, 13, 1, 1, 2, 2, 2],
 			],
 		],
 		"passives": [
