@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/backgrounds/intermission_background.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/characters/princess.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Game-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/sprites/actions/enchanted.png" type="Texture" id=4]
+[ext_resource path="res://scripts/CreditsScreen.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="CreditsScreen" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+scale = Vector2( 0.96, 0.96 )
+texture = ExtResource( 1 )
+
+[node name="PrincessSprite" type="Sprite" parent="Background"]
+position = Vector2( 158.333, -179.167 )
+scale = Vector2( 0.516796, 0.516796 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="EnchantedSprite" type="Sprite" parent="Background"]
+position = Vector2( 243.75, -180.208 )
+scale = Vector2( 1.04167, 1.04167 )
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="CreditsLabel" type="Label" parent="Background"]
+margin_left = -151.042
+margin_top = -269.792
+margin_right = 153.958
+margin_bottom = -191.792
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Design and Art
+poopie"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="CreditsLabel2" type="Label" parent="Background"]
+margin_left = 27.0833
+margin_top = -171.875
+margin_right = 534.083
+margin_bottom = -7.875
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Design, Programming and Writing
+Krasimir Balchev"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="CreditsLabel3" type="Label" parent="Background"]
+margin_left = 307.292
+margin_top = -202.083
+margin_right = 583.292
+margin_bottom = -137.083
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Music
+Jaedan Calladine "
+align = 1
+valign = 1
+autowrap = true
+
+[node name="CreditsLabel4" type="Label" parent="Background"]
+margin_left = 203.125
+margin_top = -313.542
+margin_right = 479.125
+margin_bottom = -214.542
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "SFX
+freesound.org, Damien Combe"
+align = 1
+valign = 1
+autowrap = true

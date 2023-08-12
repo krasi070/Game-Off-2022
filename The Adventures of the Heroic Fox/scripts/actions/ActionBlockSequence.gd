@@ -156,12 +156,29 @@ func change_from_to(from: int, to: int) -> void:
 
 func player_advantage() -> void:
 	randomize()
+	var defend_count: int = 0
+	var attack_count: int = 0
+	var taken_index: int = -1
 	for action in actions:
 		var rand_num: int = randi() % 100
 		if action.data.action_type == Enums.ACTION_TYPE.NOTHING and \
 			rand_num >= 75:
 			action.data = ActionManager.data_by_action[Enums.ACTION_TYPE.ATTACK]
 			action.set_sprite_data()
+		if _is_action_attack(action.data.action_type):
+			attack_count += 1
+		if _is_action_defend(action.data.action_type):
+			defend_count += 1
+	if attack_count <= 0:
+		taken_index = randi() % actions.size()
+		actions[taken_index].data = ActionManager.data_by_action[Enums.ACTION_TYPE.ATTACK]
+		actions[taken_index].set_sprite_data()
+	if defend_count <= 0 and actions.size() > 1:
+		var index_candidates: Array = range(actions.size())
+		index_candidates.erase(taken_index)
+		var rand_index: int = index_candidates[randi() % index_candidates.size()]
+		actions[rand_index].data = ActionManager.data_by_action[Enums.ACTION_TYPE.DEFEND]
+		actions[rand_index].set_sprite_data()
 
 
 func did_swap() -> bool:
@@ -316,6 +333,29 @@ func _are_shapes_eq_in_section(start: int, end: int) -> bool:
 func _set_action_layers(layer: int) -> void:
 	for action in actions:
 		action.set_area_layer(layer)
+
+
+func _is_action_attack(action_type: int) -> bool:
+	match action_type:
+		Enums.ACTION_TYPE.ATTACK, \
+		Enums.ACTION_TYPE.CLAW, \
+		Enums.ACTION_TYPE.SMACK, \
+		Enums.ACTION_TYPE.DOUBLE_KNIVES, \
+		Enums.ACTION_TYPE.SPIDER, \
+		Enums.ACTION_TYPE.LIZARD_HEAD, \
+		Enums.ACTION_TYPE.POISON:
+			return true
+		_:
+			return false 
+
+
+func _is_action_defend(action_type: int) -> bool:
+	match action_type:
+		Enums.ACTION_TYPE.DEFEND, \
+		Enums.ACTION_TYPE.PARRY:
+			return true
+		_:
+			return false 
 
 
 func _visibility_changed() -> void:

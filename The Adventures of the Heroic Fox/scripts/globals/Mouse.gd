@@ -4,6 +4,8 @@ signal hovered_bubble
 signal exited_bubble
 signal clicked_bubble
 
+signal left_clicked
+
 signal hovered_action(action)
 signal exited_action(action_id)
 signal clicked_action(action)
@@ -34,6 +36,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if is_active and event.is_action_released("left_click"):
+		emit_signal("left_clicked")
 		if is_instance_valid(hovering_over_action):
 			emit_signal("clicked_action", hovering_over_action)
 		elif is_instance_valid(hovering_over_passive):

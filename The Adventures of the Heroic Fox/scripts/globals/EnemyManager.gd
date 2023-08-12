@@ -4,6 +4,14 @@ const LAST_ENEMY: int = 5
 
 var curr_enemy_index: int = 0
 
+var princess: Dictionary = {
+	"name": "Princess",
+	"frames": load("res://assets/resources/sprite_frames/characters/PrincessSpriteFrames.tres"),
+	"battle_pos": Vector2(1000, 500),
+	"flip_h": false,
+	"story": PrincessStories.ending_story,
+}
+
 var enemies: Array = [
 	{
 		"name": "Golem",

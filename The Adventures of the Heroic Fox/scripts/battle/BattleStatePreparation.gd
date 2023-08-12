@@ -4,7 +4,7 @@ func on_enter() -> void:
 	obj.hide_battle_ui()
 	obj.player_seq.selectable = false
 	obj.reset_passive_containers()
-	_set_sprites()
+	obj.set_sprites(EnemyManager.get_enemy())
 	_set_stats()
 	#obj.set_unit_initial_passives(PlayerStats, obj.player_passive_effect_container)
 	#obj.set_unit_initial_passives(EnemyStats, obj.enemy_passive_effect_container)
@@ -36,20 +36,20 @@ func _set_stats() -> void:
 		EnemyStats.apply_passive(passive)
 
 
-func _set_sprites() -> void:
-	obj.enemy_character.set_sprite_frames(EnemyManager.get_enemy().frames)
-	obj.enemy_character.position = EnemyManager.get_enemy().battle_pos
-	if EnemyManager.get_enemy().has("flip_h"):
-		obj.enemy_character.anim_sprite.flip_h = EnemyManager.get_enemy().flip_h
-		obj.enemy_character.effect_sprite.flip_h = EnemyManager.get_enemy().flip_h
-	obj.background.texture = EnemyManager.get_enemy().background
-	if EnemyManager.get_enemy().has("background_top"):
-		obj.background_top.texture = EnemyManager.get_enemy().background_top
-		obj.background_top.show()
-		print("backgound here")
-	else:
-		obj.background_top.hide()
-	obj.enemy_character.set_is_sprite_anim_playing(true)
-	obj.enemy_character.anim_active = true
-	obj.hero_character.set_is_sprite_anim_playing(true)
-	obj.hero_character.anim_active = true
+#func _set_sprites() -> void:
+#	obj.enemy_character.set_sprite_frames(EnemyManager.get_enemy().frames)
+#	obj.enemy_character.position = EnemyManager.get_enemy().battle_pos
+#	if EnemyManager.get_enemy().has("flip_h"):
+#		obj.enemy_character.anim_sprite.flip_h = EnemyManager.get_enemy().flip_h
+#		obj.enemy_character.effect_sprite.flip_h = EnemyManager.get_enemy().flip_h
+#	obj.background.texture = EnemyManager.get_enemy().background
+#	if EnemyManager.get_enemy().has("background_top"):
+#		obj.background_top.texture = EnemyManager.get_enemy().background_top
+#		obj.background_top.show()
+#		print("backgound here")
+#	else:
+#		obj.background_top.hide()
+#	obj.enemy_character.set_is_sprite_anim_playing(true)
+#	obj.enemy_character.anim_active = true
+#	obj.hero_character.set_is_sprite_anim_playing(true)
+#	obj.hero_character.anim_active = true

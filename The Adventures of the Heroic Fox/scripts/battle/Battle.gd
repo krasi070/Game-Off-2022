@@ -130,6 +130,12 @@ func set_passive_effect_anim_activations(unit: UnitStats, seq: Node2D, container
 	if is_instance_valid(plot_armor_passive):
 		plot_armor_passive.set_active(state == "ActionPairExecution" or state == "AfterExecution")
 	
+	# Plus One Fly
+	var plus_one_fly_passive: Node2D = \
+		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.PLUS_FLY)
+	if is_instance_valid(plus_one_fly_passive):
+		plus_one_fly_passive.set_active(true)
+	
 	# Rage
 	var rage_passive: Node2D = \
 		container.get_passive_by_type(Enums.PASSIVE_EFFECT_TYPE.RAGE)
@@ -152,6 +158,25 @@ func set_passive_effect_anim_activations(unit: UnitStats, seq: Node2D, container
 func update_passive_active_anims(state: String) -> void:
 	set_passive_effect_anim_activations(PlayerStats, player_seq, player_passive_effect_container, state)
 	set_passive_effect_anim_activations(EnemyStats, enemy_seq, enemy_passive_effect_container, state)
+
+
+func set_sprites(enemy_char_data: Dictionary) -> void:
+	enemy_character.set_sprite_frames(enemy_char_data.frames)
+	enemy_character.position = enemy_char_data.battle_pos
+	if enemy_char_data.has("flip_h"):
+		enemy_character.anim_sprite.flip_h = enemy_char_data.flip_h
+		enemy_character.effect_sprite.flip_h = enemy_char_data.flip_h
+	if enemy_char_data.has("background"):
+		background.texture = enemy_char_data.background
+	if enemy_char_data.has("background_top"):
+		background_top.texture = enemy_char_data.background_top
+		background_top.show()
+	else:
+		background_top.hide()
+	enemy_character.set_is_sprite_anim_playing(true)
+	enemy_character.anim_active = true
+	hero_character.set_is_sprite_anim_playing(true)
+	hero_character.anim_active = true
 
 
 func _set_opponent_seq() -> void:

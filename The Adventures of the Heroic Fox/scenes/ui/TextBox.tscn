@@ -75,6 +75,7 @@ margin_right = -40.0
 margin_bottom = -40.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="TextBox/Margin"]
+self_modulate = Color( 1, 1, 1, 0.705882 )
 margin_right = 1840.0
 margin_bottom = 260.0
 texture = ExtResource( 5 )
@@ -104,7 +105,7 @@ rect_min_size = Vector2( 200, 200 )
 [node name="AnimatedPortrait" type="AnimatedSprite" parent="TextBox/Margin/NinePatchRect/Margin/HBox/Control"]
 frames = ExtResource( 6 )
 animation = "boil"
-frame = 2
+frame = 5
 playing = true
 offset = Vector2( 100, 100 )
 

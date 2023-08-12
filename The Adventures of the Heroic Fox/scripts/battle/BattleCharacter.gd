@@ -59,6 +59,14 @@ func set_is_sprite_anim_playing(is_playing: bool) -> void:
 	effect_sprite.playing = is_playing
 
 
+func play_leave_anim() -> void:
+	anim_player.play("enemy_leave")
+
+
+func play_appear_anim() -> void:
+	anim_player.play_backwards("enemy_leave")
+
+
 func play_attack_anim(attack_frames: SpriteFrames) -> void:
 	var instance: Control = _create_text_effect_instance(center_text_spawner.global_position)
 	instance.play_attacked_anim(attack_frames, anim_name_suffix)

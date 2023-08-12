@@ -109,8 +109,8 @@ func exec_parry(from: UnitStats, to: UnitStats, is_second_execution: bool = fals
 			deal_damage = to.temp_stats.dealing_damage_disregading_enemy_stats
 		if from.has_passive(Enums.PASSIVE_EFFECT_TYPE.RAGE) and from.health < floor(from.max_health / 2.0):
 			deal_damage *= 2
-		if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR):
-			deal_damage = max(deal_damage - 1, 0)
+		if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR) and deal_damage > 1:
+			deal_damage = max(deal_damage - 1, 1)
 		from.attacked(data_by_action[Enums.ACTION_TYPE.PARRY].action_sprite_frames)
 		to.hurt(deal_damage)
 
@@ -127,8 +127,8 @@ func exec_spider(from: UnitStats, to: UnitStats, is_second_execution: bool = fal
 				dealt_damage *= to.turn_stats.damage_multiplier
 			if to.temp_stats.has("damage_multiplier"):
 				dealt_damage *= to.temp_stats.damage_multiplier
-			if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR):
-				dealt_damage = max(dealt_damage - 1, 0)
+			if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR) and dealt_damage > 1:
+				dealt_damage = max(dealt_damage - 1, 1)
 			# Spiders squash each other
 			if to.temp_stats.has("spider_damage"):
 				dealt_damage = 0
@@ -263,8 +263,8 @@ func _exec_attack_helper(from: UnitStats, to: UnitStats, damage: int) -> int:
 		damage *= to.temp_stats.damage_multiplier
 	from.temp_stats["dealing_damage"] = damage
 	print("ATTACK from %s for %d damage" % [from.character_name, damage])
-	if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR):
-		damage = max(damage - 1, 0)
+	if to.has_passive(Enums.PASSIVE_EFFECT_TYPE.PLOT_ARMOR) and damage > 1:
+		damage = max(damage - 1, 1)
 	if to.temp_stats.has("defense"):
 		damage = 0
 	if to.temp_stats.has("spider_damage"):

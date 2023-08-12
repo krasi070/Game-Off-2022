@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts/battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://scripts/battle/BattleStatePreparation.gd" type="Script" id=2]
@@ -11,18 +11,15 @@
 [ext_resource path="res://scripts/battle/BattleStateWin.gd" type="Script" id=9]
 [ext_resource path="res://scenes/ui/HealthBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/ui/EgoCounter.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/sprites/backgrounds/centipede_background.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/backgrounds/lizard_background.png" type="Texture" id=12]
 [ext_resource path="res://scripts/battle/BattleStateStory.gd" type="Script" id=13]
-[ext_resource path="res://assets/resources/sprite_frames/characters/CentipedeSpriteFrames.tres" type="SpriteFrames" id=14]
 [ext_resource path="res://scenes/ActionBlockSequence.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/ui/InfoBox.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scripts/battle/BattleStateAfterExecution.gd" type="Script" id=18]
-[ext_resource path="res://assets/resources/sprite_frames/characters/SquireSpriteFrames.tres" type="SpriteFrames" id=19]
 [ext_resource path="res://assets/sprites/ui/health_bar_fill.png" type="Texture" id=20]
 [ext_resource path="res://assets/sprites/ui/health_bar_flipped_fill.png" type="Texture" id=21]
 [ext_resource path="res://scenes/ui/PassiveEffectContainer.tscn" type="PackedScene" id=22]
-[ext_resource path="res://assets/resources/sprite_frames/characters/HeroSpriteFrames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://assets/resources/shaders/HeroShaderMaterial.tres" type="Material" id=24]
 [ext_resource path="res://assets/resources/shaders/EnemyShaderMaterial.tres" type="Material" id=25]
 [ext_resource path="res://scenes/Squire.tscn" type="PackedScene" id=26]
@@ -30,6 +27,7 @@
 [ext_resource path="res://scripts/ui/BattleMessage.gd" type="Script" id=28]
 [ext_resource path="res://assets/sprites/ui/ego_empty.png" type="Texture" id=29]
 [ext_resource path="res://assets/sprites/backgrounds/centipede_background_top.png" type="Texture" id=30]
+[ext_resource path="res://scripts/battle/BattleStateEnding.gd" type="Script" id=31]
 
 [sub_resource type="Animation" id=2]
 resource_name = "ui_layer_appear"
@@ -72,39 +70,14 @@ position = Vector2( -970, 258.621 )
 shader_material = ExtResource( 24 )
 
 [node name="Enemy" parent="Background" instance=ExtResource( 17 )]
-position = Vector2( -922.414, 258.621 )
+position = Vector2( 1000, 400 )
 shader_material = ExtResource( 25 )
 
 [node name="Squire" parent="Background" instance=ExtResource( 26 )]
 position = Vector2( -1350, 390 )
 
-[node name="SquireAnimatedSprite" type="AnimatedSprite" parent="Background"]
-visible = false
-position = Vector2( -1320, 390 )
-scale = Vector2( 1.6, 1.6 )
-frames = ExtResource( 19 )
-animation = "idle"
-frame = 18
-playing = true
-flip_h = true
-
-[node name="HeroAnimatedSprite" type="AnimatedSprite" parent="Background"]
-visible = false
-position = Vector2( -922.414, 258.621 )
-scale = Vector2( 1.6, 1.6 )
-frames = ExtResource( 23 )
-animation = "idle"
-
-[node name="EnemyAnimatedSprite" type="AnimatedSprite" parent="Background"]
-visible = false
-position = Vector2( 1090, 390 )
-scale = Vector2( 1.6, 1.6 )
-frames = ExtResource( 14 )
-animation = "idle"
-frame = 3
-playing = true
-
 [node name="BackgroundTop" type="Sprite" parent="Background"]
+visible = false
 texture = ExtResource( 30 )
 
 [node name="PlayerSequence" parent="." instance=ExtResource( 15 )]
@@ -233,6 +206,9 @@ script = ExtResource( 8 )
 
 [node name="Win" type="Node" parent="States"]
 script = ExtResource( 9 )
+
+[node name="Ending" type="Node" parent="States"]
+script = ExtResource( 31 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/ui_layer_appear = SubResource( 2 )
